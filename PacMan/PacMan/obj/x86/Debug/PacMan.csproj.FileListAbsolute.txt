@@ -12,3 +12,25 @@ C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\bean.xnb
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\mur.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\bean.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\mur.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\PacMan.exe
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\PacMan.pdb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.xml
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\obj\x86\Debug\PacMan.csprojResolveAssemblyReference.cache
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\obj\x86\Debug\PacMan.exe
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanBas0.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite0.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche0.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut0.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanBas1.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite1.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche1.xnb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut1.xnb

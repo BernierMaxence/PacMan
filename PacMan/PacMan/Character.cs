@@ -19,4 +19,12 @@ public class Character
     {
         return _position; 
     }
+
+    public Position Position
+    {
+        get { return _position; }
+        set { _position = value; }
+    }
+
+  
 }

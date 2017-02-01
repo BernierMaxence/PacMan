@@ -18,6 +18,11 @@ namespace PacMan
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        PacManCharacter pacManCharacter;
+        AnimatedPacMan animatedPacMan;
+        int timer = 0;
+        int counterAnimation =0; 
+
         byte[,] map;
         AnimatedObject wall;
         AnimatedObject bean;
@@ -26,6 +31,8 @@ namespace PacMan
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            pacManCharacter = new PacManCharacter(new Position(1, 1), 3, Direction.Right);
 
             AnimatedObject wall;
             AnimatedObject bean;
@@ -94,6 +101,8 @@ namespace PacMan
             // on charge un objet mur 
             wall = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+            animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
+
 
         }
 
@@ -118,8 +127,20 @@ namespace PacMan
                 this.Exit();
 
             // TODO: Add your update logic here
+            ++timer;
+            if (timer%5 == 0) 
+            {
+                ++counterAnimation;
+
+                move();
+                animatePacMan();
+            }
+            getKeyboardInput();
 
             base.Update(gameTime);
+
+
+
         }
 
         /// <summary>
@@ -157,10 +178,134 @@ namespace PacMan
                 }
             }
 
+            spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
+
 
             base.Draw(gameTime);
             spriteBatch.End();
         }
+        public void animatePacMan()
+        {
+            switch (pacManCharacter.Direction)
+            {
+                case Direction.Down:
+                    if (counterAnimation%2 == 0) animatedPacMan.Texture = Content.Load<Texture2D>("pacmanBas0");
+                    else animatedPacMan.Texture = Content.Load<Texture2D>("pacmanBas1");
 
+                    break;
+                case Direction.Right:
+                    if (counterAnimation % 2 == 0) animatedPacMan.Texture = Content.Load<Texture2D>("pacmanDroite0");
+                    else animatedPacMan.Texture = Content.Load<Texture2D>("pacmanDroite1");
+
+                    break;
+                case Direction.Left:
+                    if (counterAnimation % 2 == 0) animatedPacMan.Texture = Content.Load<Texture2D>("pacmanGauche0");
+                    else animatedPacMan.Texture = Content.Load<Texture2D>("pacmanGauche1");
+
+                    break;
+                case Direction.Up:
+                    if (counterAnimation % 2 == 0) animatedPacMan.Texture = Content.Load<Texture2D>("pacmanHaut0");
+                    else animatedPacMan.Texture = Content.Load<Texture2D>("pacmanHaut1");
+
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void getKeyboardInput()
+        {
+            KeyboardState keyboard = Keyboard.GetState();
+            if (keyboard.IsKeyDown(Keys.Right))
+            {
+                if (CheckNextCell(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Right;
+                
+                
+                //on vérifie s’il est possible de se déplacer
+                // si oui on avance
+            }
+            else if (keyboard.IsKeyDown(Keys.Left))
+            {
+                if (CheckNextCell(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Left;
+                
+                //on vérifie s’il est possible de se déplacer
+                // si oui on avance
+            }
+            else if (keyboard.IsKeyDown(Keys.Up))
+            {
+                if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y-1)) pacManCharacter.Direction = Direction.Up;
+                
+                //on vérifie s’il est possible de se déplacer
+                // si oui on avance
+            }
+            else if (keyboard.IsKeyDown(Keys.Down))
+            {
+                if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1)) pacManCharacter.Direction = Direction.Down;
+                
+                
+                
+                //on vérifie s’il est possible de se déplacer
+                // si oui on avance
+            }
+        }
+
+        public void move()
+        {
+            Direction direction = pacManCharacter.Direction; 
+            switch (pacManCharacter.Direction)
+            {
+                case Direction.Down:
+
+                    if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1))
+                    {
+                        pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1);
+                    }
+
+                    break; 
+
+                case Direction.Right:
+                    if (CheckNextCell(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y))
+                    {
+                        pacManCharacter.Position = new Position(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y);
+                    }
+
+                    break; 
+
+                case Direction.Left:
+                    if (CheckNextCell(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y))
+                    {
+                        pacManCharacter.Position = new Position(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y);
+                    }
+                    break; 
+
+                case Direction.Up:
+                    if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1))
+                    {
+                        pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1);
+                    }
+
+                    break; 
+
+                default:
+                    break; 
+
+            }
+
+        }
+        public bool CheckNextCell (int x, int y)
+        {
+
+            if (y > 0 && y < 31 && x > 0 && x < 28)
+            {
+                if (map[y, x] == 0) return false;
+                else return true;
+            }
+            else return false; 
+            
+
+           
+        }
     }
+
+    
+
 }

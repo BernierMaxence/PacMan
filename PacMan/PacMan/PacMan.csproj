@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimatedObject.cs" />
+    <Compile Include="AnimatedPacMan.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="PacManCharacter.cs" />
     <Compile Include="Position.cs" />

@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\bean.xnb</Output>
-      <Time>2017-02-01T17:17:08.583529+01:00</Time>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\bean.xnb</Output>
+      <Time>2017-02-01T19:34:01.1175948+01:00</Time>
     </Item>
     <Item>
       <Source>mur.png</Source>
@@ -16,8 +16,80 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\mur.xnb</Output>
-      <Time>2017-02-01T16:21:26.6393807+01:00</Time>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\mur.xnb</Output>
+      <Time>2017-02-01T19:34:01.1180951+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanBas0.png</Source>
+      <Name>pacmanBas0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanBas0.xnb</Output>
+      <Time>2017-02-01T20:02:21.4014534+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanDroite0.png</Source>
+      <Name>pacmanDroite0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite0.xnb</Output>
+      <Time>2017-02-01T20:02:28.9838559+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanGauche0.png</Source>
+      <Name>pacmanGauche0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche0.xnb</Output>
+      <Time>2017-02-01T20:02:31.7940335+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanHaut0.png</Source>
+      <Name>pacmanHaut0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut0.xnb</Output>
+      <Time>2017-02-01T20:02:35.0655764+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanBas1.png</Source>
+      <Name>pacmanBas1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanBas1.xnb</Output>
+      <Time>2017-02-01T22:19:43.8414337+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanDroite1.png</Source>
+      <Name>pacmanDroite1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite1.xnb</Output>
+      <Time>2017-02-01T22:19:48.4877135+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanGauche1.png</Source>
+      <Name>pacmanGauche1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche1.xnb</Output>
+      <Time>2017-02-01T22:19:51.2573376+01:00</Time>
+    </Item>
+    <Item>
+      <Source>pacmanHaut1.png</Source>
+      <Name>pacmanHaut1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut1.xnb</Output>
+      <Time>2017-02-01T22:19:53.0189466+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -26,10 +98,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacManContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacManContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -57,8 +129,8 @@
         <Value>2011-09-01T17:22:30+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-02-01T15:21:00.7429913+01:00</Value>
+        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2017-01-08T16:06:03.0498916+01:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

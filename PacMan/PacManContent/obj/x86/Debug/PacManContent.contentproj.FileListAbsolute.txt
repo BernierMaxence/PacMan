@@ -1,1 +1,2 @@
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacManContent\obj\x86\Debug\PacManContent.contentprojResolveAssemblyReference.cache
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacManContent\obj\x86\Debug\PacManContent.contentprojResolveAssemblyReference.cache
