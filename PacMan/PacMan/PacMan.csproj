@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="AnimatedObject.cs" />
     <Compile Include="Character.cs" />
-    <Compile Include="PacMan.cs" />
+    <Compile Include="PacManCharacter.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

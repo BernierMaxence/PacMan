@@ -10,3 +10,5 @@ C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.exe
 C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\bean.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\mur.xnb

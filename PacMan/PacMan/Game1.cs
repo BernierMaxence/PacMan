@@ -20,6 +20,7 @@ namespace PacMan
         SpriteBatch spriteBatch;
         byte[,] map;
         AnimatedObject wall;
+        AnimatedObject bean;
 
         public Game1()
         {
@@ -27,8 +28,9 @@ namespace PacMan
             Content.RootDirectory = "Content";
 
             AnimatedObject wall;
+            AnimatedObject bean;
 
-            map = new byte[31,28]{
+            map = new byte[31, 28]{
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0},
             {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
@@ -85,13 +87,14 @@ namespace PacMan
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             //  changing the back buffer size changes the window size (when in windowed mode)
-           graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 660;
             graphics.ApplyChanges();
             // on charge un objet mur 
             wall = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+            bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+
         }
 
         /// <summary>
@@ -129,7 +132,35 @@ namespace PacMan
 
             // TODO: Add your drawing code here
 
+            spriteBatch.Begin();
+
+            for (int x = 0; x < 31; x++)
+            {
+                for (int y = 0; y < 28; y++)
+                {
+                    if (map[x, y] == 0)
+                    {
+                        int xpos, ypos;
+                        xpos = x * 20;
+                        ypos = y * 20;
+                        Vector2 pos = new Vector2(ypos, xpos);
+                        spriteBatch.Draw(wall.Texture, pos, Color.White);
+                    }
+                    else if (map[x, y] == 1)
+                    {
+                        int xpos, ypos;
+                        xpos = x * 20;
+                        ypos = y * 20;
+                        Vector2 pos = new Vector2(ypos, xpos);
+                        spriteBatch.Draw(bean.Texture, pos, Color.White);
+                    }
+                }
+            }
+
+
             base.Draw(gameTime);
+            spriteBatch.End();
         }
+
     }
 }

@@ -5,10 +5,9 @@ public class PacManCharacter : Character
 {
     private int _life; 
 
-	public PacManCharacter(Position position, int life )
+	public PacManCharacter(Position position, int life) : base(position)
 	{
-        base(position);
-        this._life = life; 
+       this._life = life; 
 	}
 
     public int getLife()
