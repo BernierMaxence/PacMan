@@ -18,6 +18,7 @@ namespace PacMan
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        AnimatedObject AnimatedPacMan; 
         byte[,] map;
 
 
@@ -85,6 +86,8 @@ namespace PacMan
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            AnimatedPacMan = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
         }
 
         /// <summary>
