@@ -1,0 +1,16 @@
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\PacMan.exe
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\PacMan.pdb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.dll
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.xml
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.csprojResolveAssemblyReference.cache
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.exe
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
