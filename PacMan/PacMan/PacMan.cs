@@ -1,10 +1,11 @@
 ﻿using System;
 
-public class PacMan : Character 
+
+public class PacManCharacter : Character 
 {
     private int _life; 
 
-	public PacMan(Position position, int life )
+	public PacManCharacter(Position position, int life )
 	{
         base(position);
         this._life = life; 
@@ -21,6 +22,6 @@ public class PacMan : Character
 
     public void looseLife()
     {
-        --life; 
+        --_life; 
     }
 }

@@ -19,7 +19,7 @@ namespace PacMan
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         byte[,] map;
-
+        AnimatedObject wall;
 
         public Game1()
         {

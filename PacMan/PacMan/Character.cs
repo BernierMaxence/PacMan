@@ -1,11 +1,11 @@
 ﻿using System;
 
-public class Charcter
+public class Character
 {
     private Position _position; 
 
 
-	public Charcter(Position position)
+	public Character(Position position)
 	{
         this._position = position; 
 
