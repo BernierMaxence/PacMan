@@ -21,7 +21,10 @@ namespace PacMan
         PacManCharacter pacManCharacter;
         AnimatedPacMan animatedPacMan;
         int timer = 0;
-        int counterAnimation =0; 
+        int counterAnimation =0;
+
+        int score = 0;
+        int nbBeans = 0;
 
         byte[,] map;
         AnimatedObject wall;
@@ -69,8 +72,18 @@ namespace PacMan
             {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
             {0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-
         };
+            for (int x = 0; x < 31; x++)
+            {
+                for (int y = 0; y < 28; y++)
+                {
+                    if (map[x, y] == 1)
+                    {
+                        nbBeans++;
+                    }
+                }
+            }
+
         }
 
         /// <summary>
@@ -138,6 +151,11 @@ namespace PacMan
             getKeyboardInput();
 
             base.Update(gameTime);
+
+            if(nbBeans == 0) {
+                MessageBox.Show("Tout ramassé");
+                Exit();
+            }
 
 
 
@@ -286,9 +304,10 @@ namespace PacMan
                     break; 
 
                 default:
-                    break; 
+                    break;
 
             }
+            checkBeanEaten();
 
         }
         public bool CheckNextCell (int x, int y)
@@ -303,6 +322,19 @@ namespace PacMan
             
 
            
+        }
+
+        public void checkBeanEaten()
+        {
+
+            int xPos = pacManCharacter.Position.X;
+            int yPos = pacManCharacter.Position.Y;
+            if (map[yPos, xPos ] == 1)
+            {
+                map[yPos, xPos] = 10;
+                nbBeans--;
+                score++;
+            }
         }
     }
 

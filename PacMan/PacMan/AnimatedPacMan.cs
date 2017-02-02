@@ -13,7 +13,6 @@ namespace PacMan
 
         public AnimatedPacMan(Texture2D texture, Vector2 position, Vector2 size, PacManCharacter pacMan) : base(texture, position, size)
         {
-
             this._pacMan = pacMan; 
         }
 
