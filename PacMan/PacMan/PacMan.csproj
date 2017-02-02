@@ -60,6 +60,8 @@
     <Compile Include="AnimatedObject.cs" />
     <Compile Include="AnimatedPacMan.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="AnimatedGost.cs" />
+    <Compile Include="GostCharacter.cs" />
     <Compile Include="PacManCharacter.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -153,7 +153,7 @@ namespace PacMan
             base.Update(gameTime);
 
             if(nbBeans == 0) {
-                MessageBox.Show("Tout ramassé");
+               // MessageBox.Show("Tout ramassé");
                 Exit();
             }
 

@@ -1,11 +1,10 @@
 ﻿using System;
 
-public enum Direction { Up, Down ,Left, Right };
 public class PacManCharacter : Character 
 {
     private int _life;
     private Direction _direction; 
-	public PacManCharacter(Position position, int life, Direction direction) : base(position)
+	public PacManCharacter(Position position, int life, Direction direction) : base(position, direction)
 	{
        this._life = life;
         this._direction = direction; 
@@ -35,9 +34,5 @@ public class PacManCharacter : Character
     }
     */
 
-    public Direction Direction
-    {
-        get { return _direction; }
-        set { _direction = value; }
-    }
+  
 }
