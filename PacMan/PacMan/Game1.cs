@@ -18,8 +18,13 @@ namespace PacMan
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        // Characters 
         PacManCharacter pacManCharacter;
+        GostCharacter gostCharacterRed; // TODO : create a list of all four gosts 
+        // Animated characters
         AnimatedPacMan animatedPacMan;
+        AnimatedGost animatedGostRed; 
+
         int timer = 0;
         int counterAnimation =0;
 
@@ -36,6 +41,9 @@ namespace PacMan
             Content.RootDirectory = "Content";
 
             pacManCharacter = new PacManCharacter(new Position(1, 1), 3, Direction.Right);
+            gostCharacterRed = new GostCharacter(new Position(14, 14), Direction.Up); 
+
+
 
             AnimatedObject wall;
             AnimatedObject bean;
@@ -115,6 +123,7 @@ namespace PacMan
             wall = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
+            animatedGostRed = new AnimatedGost(Content.Load<Texture2D>("fantomeRouge"), new Vector2(0f, 0f), new Vector2(20f, 20f), gostCharacterRed); 
 
 
         }
@@ -146,6 +155,7 @@ namespace PacMan
                 ++counterAnimation;
 
                 move();
+                moveGost(); 
                 animatePacMan();
             }
             getKeyboardInput();
@@ -197,6 +207,7 @@ namespace PacMan
             }
 
             spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
+            spriteBatch.Draw(animatedGostRed.Texture, new Vector2(gostCharacterRed.getPostion().X * 20, gostCharacterRed.getPostion().Y * 20), Color.White);
 
 
             base.Draw(gameTime);
@@ -268,7 +279,6 @@ namespace PacMan
 
         public void move()
         {
-            Direction direction = pacManCharacter.Direction; 
             switch (pacManCharacter.Direction)
             {
                 case Direction.Down:
@@ -308,6 +318,7 @@ namespace PacMan
 
             }
             checkBeanEaten();
+            //checkGost 
 
         }
         public bool CheckNextCell (int x, int y)
@@ -335,6 +346,14 @@ namespace PacMan
                 nbBeans--;
                 score++;
             }
+        }
+
+        public void moveGost()
+        {
+            
+
+            
+
         }
     }
 

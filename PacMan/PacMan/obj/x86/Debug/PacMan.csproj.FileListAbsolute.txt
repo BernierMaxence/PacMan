@@ -56,3 +56,4 @@ C:\Users\Mathieu\Source\Repos\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.csprojRe
 C:\Users\Mathieu\Source\Repos\PacMan\PacMan\PacMan\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Mathieu\Source\Repos\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.exe
 C:\Users\Mathieu\Source\Repos\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
+C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\fantomeRouge.xnb

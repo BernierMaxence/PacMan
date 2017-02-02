@@ -91,6 +91,15 @@
       <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut1.xnb</Output>
       <Time>2017-02-01T22:19:53.0189466+01:00</Time>
     </Item>
+    <Item>
+      <Source>fantomeRouge.png</Source>
+      <Name>fantomeRouge</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Eriwyr\Documents\Maxence\PacMan\PacMan\bin\x86\Debug\Content\fantomeRouge.xnb</Output>
+      <Time>2017-02-02T22:17:17.521069+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{D05DC9CE-BBB3-4A37-A6D2-F783595A6090}</ContentProjectGUID>

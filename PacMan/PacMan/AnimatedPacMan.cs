@@ -9,13 +9,17 @@ namespace PacMan
 {
     class AnimatedPacMan : AnimatedObject
     {
-        PacManCharacter _pacMan; 
+        PacManCharacter _pacManCharacter; 
 
         public AnimatedPacMan(Texture2D texture, Vector2 position, Vector2 size, PacManCharacter pacMan) : base(texture, position, size)
         {
-            this._pacMan = pacMan; 
+            this._pacManCharacter = pacMan; 
+        }
+        public PacManCharacter pacManCharacter
+        {
+            get { return _pacManCharacter; }
+            set { _pacManCharacter = value; }
         }
 
-        
     }
 }

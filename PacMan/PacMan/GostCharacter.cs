@@ -15,7 +15,7 @@ namespace PacMan
         public Direction randomDirection()
         {
             Random rand = new Random();
-            return (Direction)rand.Next(1, 5);
+            return (Direction)rand.Next(0, 4);
 
         }
     }
