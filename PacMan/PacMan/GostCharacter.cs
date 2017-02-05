@@ -14,10 +14,28 @@ namespace PacMan
 
         public Direction randomDirection()
         {
+            List<Direction> allowedDirections = new List<Direction>();
+            allowedDirections.Add(Direction.Up);
+            allowedDirections.Add(Direction.Right);
+            allowedDirections.Add(Direction.Left);
+            allowedDirections.Add(Direction.Down);
+            return allowedRandomDiretion(allowedDirections); 
+
+        }
+
+        public Direction allowedRandomDiretion(List<Direction> allowedDirections)
+        {
             Random rand = new Random();
-            Direction dir = (Direction)rand.Next(0, 4);
-            Console.WriteLine("dir " + dir);
-            return dir; 
+            int decision = rand.Next(0, 4);
+            if (decision < allowedDirections.Count)
+            {
+                return allowedDirections.ElementAt(decision); 
+            } else
+            {
+                allowedDirections.RemoveAt(decision);
+                return allowedRandomDiretion(allowedDirections); 
+            }
+            
         }
         public Direction nextDirection()
         {

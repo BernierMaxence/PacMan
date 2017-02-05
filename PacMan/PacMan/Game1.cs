@@ -372,6 +372,7 @@ namespace PacMan
         }
         public void moveGosts()
         {
+            Console.WriteLine("gost moves"); 
             Position nextPosition = getNextPosition(gostCharacterRed, gostCharacterRed.Direction); 
             bool forward = CheckNextCell(nextPosition.X, nextPosition.Y); 
             if(forward)
@@ -383,7 +384,7 @@ namespace PacMan
                 
                 while (!directionAllowed)
                 {
-                    gostCharacterRed.Direction = gostCharacterRed.nextDirection(); 
+                    gostCharacterRed.Direction = gostCharacterRed.randomDirection(); 
                     nextPosition = getNextPosition(gostCharacterRed, gostCharacterRed.Direction);
                     directionAllowed = CheckNextCell(nextPosition.X, nextPosition.Y); 
                 }
