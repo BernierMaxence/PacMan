@@ -91,3 +91,5 @@ C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\bar
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\gros_bean.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\FantomePeur0.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\FantomePeur1.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\game_over.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\ready.xnb

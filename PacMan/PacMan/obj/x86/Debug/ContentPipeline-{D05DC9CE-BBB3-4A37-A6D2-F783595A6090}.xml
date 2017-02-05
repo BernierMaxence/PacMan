@@ -199,6 +199,24 @@
       <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\FantomePeur1.xnb</Output>
       <Time>2017-02-05T11:41:27.76546+01:00</Time>
     </Item>
+    <Item>
+      <Source>game_over.png</Source>
+      <Name>game_over</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\game_over.xnb</Output>
+      <Time>2017-02-05T12:35:37.661008+01:00</Time>
+    </Item>
+    <Item>
+      <Source>ready.png</Source>
+      <Name>ready</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\ready.xnb</Output>
+      <Time>2017-02-05T13:10:38.6876105+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{D05DC9CE-BBB3-4A37-A6D2-F783595A6090}</ContentProjectGUID>

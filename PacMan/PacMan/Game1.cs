@@ -23,13 +23,14 @@ namespace PacMan
         // Animated characters
         AnimatedPacMan animatedPacMan;
         List<AnimatedGhost> listAnimatedGhosts;
+        bool restart =true; 
 
         List<GhostCharacter> listGhostCharacters;
 
         int timer = 0;
         int counterAnimation = 0;
         int beginPower=0;
-        int beginPause; 
+        int beginPause=0; 
 
         int score = 0;
         int nbBeans = 0;
@@ -47,7 +48,7 @@ namespace PacMan
 
             pacManCharacter = new PacManCharacter(new Position(13, 17), new Position(15, 17),  3, Direction.Right);
             listGhostCharacters = new List<GhostCharacter>();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 4; i++)
             {
                 listGhostCharacters.Add(new GhostCharacter(new Position(12 + i, 14), new Position(12 + i, 14), Direction.Up));
             }
@@ -133,7 +134,7 @@ namespace PacMan
             bigBean = new AnimatedObject(Content.Load<Texture2D>("gros_bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
             listAnimatedGhosts = new List<AnimatedGhost>();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 4; i++)
             {
                 listAnimatedGhosts.Add(new AnimatedGhost(Content.Load<Texture2D>("fantome" + i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGhostCharacters.ElementAt(i)));
             }
@@ -163,32 +164,50 @@ namespace PacMan
 
             // TODO: Add your update logic here
             ++timer;
-            if (timer % 5 == 0)
+            if (!pacManCharacter.Dead)
             {
-                ++counterAnimation;
-                if (pacManCharacter.Moving)
+
+
+                if (timer - beginPause > 200)
                 {
-                    movePacMan();
-                    // move(ghostCharacterRed); 
-                    moveghosts();
-                   // pacManPower(beginPower-timer); 
-                    animatePacMan();
-                    getKeyboardInput();
+                    beginPause = -1;
+
                 }
-                else
+                if (beginPause == -1 && (timer - beginPause > 200))
                 {
-                    PacManCharacterDies();
+                    restart = false;
+                    beginPause = -1;
+
+
+                    if (timer % 5 == 0)
+                    {
+                        ++counterAnimation;
+                        if (pacManCharacter.Moving)
+                        {
+                            movePacMan();
+                            // move(ghostCharacterRed); 
+                            moveghosts();
+                            // pacManPower(beginPower-timer); 
+                            animatePacMan();
+                            getKeyboardInput();
+                        }
+                        else
+                        {
+                            PacManCharacterDies();
+                        }
+
+                    }
+
+                    base.Update(gameTime);
+
+                    if (nbBeans == 0)
+                    {
+                        // MessageBox.Show("Tout ramassé");
+                        Exit();
+                    }
                 }
-
             }
-
-            base.Update(gameTime);
-
-            if (nbBeans == 0)
-            {
-                // MessageBox.Show("Tout ramassé");
-                Exit();
-            }
+            
 
 
 
@@ -239,12 +258,22 @@ namespace PacMan
             spriteBatch.Draw(Content.Load<Texture2D>("barriereFantome"), new Vector2(13 * 20, 12 * 20), Color.White);
 
             spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 4; i++)
             {
                 spriteBatch.Draw(listAnimatedGhosts.ElementAt(i).Texture, new Vector2(listGhostCharacters.ElementAt(i).getPostion().X * 20, listGhostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
 
             }
-            //
+            if (restart)
+            {
+                spriteBatch.Draw(Content.Load<Texture2D>("ready"), new Vector2(5 * 20, 5 * 20), Color.White);
+
+            }
+
+            if (pacManCharacter.Dead)
+            {
+                spriteBatch.Draw(Content.Load<Texture2D>("game_over"), new Vector2(4 * 20, 5 * 20), Color.White);
+
+            }
 
 
             base.Draw(gameTime);
@@ -354,58 +383,72 @@ namespace PacMan
         {
             if (pacManCharacter.Moving)
             {
-                switch (pacManCharacter.Direction)
+                if (pacManCharacter.Position.X == 26 && pacManCharacter.Position.Y == 14 && pacManCharacter.Direction ==Direction.Right)
                 {
-                    case Direction.Down:
+                    pacManCharacter.Position = new Position(1, 14);
+                } else if (pacManCharacter.Position.X == 1 && pacManCharacter.Position.Y == 14 && pacManCharacter.Direction == Direction.Left)
+                {
+                    pacManCharacter.Position = new Position(26, 14);
 
-                        if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1))
-                        {
-                            pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1);
-                        }
-
-                        break;
-
-                    case Direction.Right:
-                        if (CheckNextCellForPacMan(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y))
-                        {
-                            pacManCharacter.Position = new Position(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y);
-                        }
-
-                        break;
-
-                    case Direction.Left:
-                        if (CheckNextCellForPacMan(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y))
-                        {
-                            pacManCharacter.Position = new Position(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y);
-                        }
-                        break;
-
-                    case Direction.Up:
-                        if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1))
-                        {
-                            pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1);
-                        }
-
-                        break;
-
-                    default:
-                        break;
 
                 }
-                checkBeanEaten();
-                if (beginPower != 0)
+                else
                 {
-                    pacManPower( timer- beginPower);
+
+
+
+                    switch (pacManCharacter.Direction)
+                    {
+                        case Direction.Down:
+
+                            if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1))
+                            {
+                                pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1);
+                            }
+
+                            break;
+
+                        case Direction.Right:
+                            if (CheckNextCellForPacMan(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y))
+                            {
+                                pacManCharacter.Position = new Position(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y);
+                            }
+
+                            break;
+
+                        case Direction.Left:
+                            if (CheckNextCellForPacMan(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y))
+                            {
+                                pacManCharacter.Position = new Position(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y);
+                            }
+                            break;
+
+                        case Direction.Up:
+                            if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1))
+                            {
+                                pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1);
+                            }
+
+                            break;
+
+                        default:
+                            break;
+
+                    }
+                    checkBeanEaten();
+                    if (beginPower != 0)
+                    {
+                        pacManPower(timer - beginPower);
+                    }
+
+                    foreach (GhostCharacter gostCharacter in listGhostCharacters)
+                    {
+                        detectEnemy(pacManCharacter, gostCharacter);
+
+                    }
+
+                    //checkghost 
                 }
-
-                foreach(GhostCharacter gostCharacter in listGhostCharacters)
-                {
-                    detectEnemy(pacManCharacter, gostCharacter); 
-
-                }
-
-                //checkghost 
-
             }
         }
         public bool CheckNextCellForghost(int x, int y)
@@ -460,23 +503,40 @@ namespace PacMan
 
 
 
-                foreach (AnimatedGhost animatedGhost in listAnimatedGhosts)
+                for (int i = 0; i < 4; i++)
                 {
-                    animatedGhost.Texture = Content.Load<Texture2D>("fantomePeur0");             
+                    if (listAnimatedGhosts.ElementAt(i).GhostCharacter.Scared)
+                    {
+                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
+
+                    } else
+                    {
+                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + 1);
+
+                    }
+
                 }
-
-
-
-            } else if (time > 400 && time <501)
+               
+            }
+            else if (time > 40000) //&& time <501)
             {
-                foreach (AnimatedGhost animatedGhost in listAnimatedGhosts)
+                for (int i = 0; i<4; i++)
+              //  foreach (AnimatedGhost animatedGhost in listAnimatedGhosts)
                 {
-                    if (counterAnimation % 2 == 0) animatedGhost.Texture = Content.Load<Texture2D>("fantomePeur0");
-                    else animatedGhost.Texture = Content.Load<Texture2D>("fantomePeur1");
+                    if (listAnimatedGhosts.ElementAt(i).GhostCharacter.Scared)
+                    {
+                        if (counterAnimation % 2 == 0) listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
+                        else listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur1");
+                    } else
+                    {
+                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome"+1);
+                        Console.Write("paspeur "); 
+                    }
+                    
                 }
-            } else if (time >500)
+            } /*else if (time >500)
             {
-                for  (int i = 0; i<1; i++)
+                for  (int i = 0; i<4; i++)
                 {
                     listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" +i);
                 }
@@ -488,7 +548,7 @@ namespace PacMan
                 beginPower = 0; 
 
 
-            }
+            }*/
 
         }
         
@@ -526,6 +586,7 @@ namespace PacMan
 
                 if ((ghostCharacter.Position.X == 13 || ghostCharacter.Position.X == 14) && ghostCharacter.Position.Y == 13)
                 {
+                    
                     ghostCharacter.InHouse = !ghostCharacter.InHouse;
                     forward = true;
                     ghostCharacter.Direction = Direction.Up;
@@ -598,14 +659,20 @@ namespace PacMan
                     {
                         ghostCharacter.Position = ghostCharacter.InitialPosition;
                     }
-                    pacManCharacter.Moving = true; 
+                    animatedPacMan.Texture = Content.Load<Texture2D>("pacmanDroite0");
+                    pacManCharacter.Direction = Direction.Right; 
+                    pacManCharacter.Moving = true;
+                    restart = true;
+                    beginPause = timer; 
                     break;
             }
         }
 
         public void ghostDies(GhostCharacter ghostCharacter)
         {
-            ghostCharacter.Position = ghostCharacter.InitialPosition; 
+            ghostCharacter.Position = ghostCharacter.InitialPosition;
+            ghostCharacter.Scared = false; 
+            ghostCharacter.InHouse = true; 
         }
         
         public void detectEnemy(PacManCharacter pacManCharcter, GhostCharacter ghostCharacter)
@@ -619,8 +686,15 @@ namespace PacMan
                 }
                 else
                 {
-                    Console.WriteLine(pacManCharacter.Life); 
-                    pacManCharacter.looseLife();
+                    if (pacManCharacter.Life >0)
+                    {
+                        pacManCharacter.looseLife();
+                    } else
+                    {
+                        pacManCharacter.Dead = true; 
+                    }
+                    
+
                     pacManCharacter.Moving = false; 
                 }
             }
