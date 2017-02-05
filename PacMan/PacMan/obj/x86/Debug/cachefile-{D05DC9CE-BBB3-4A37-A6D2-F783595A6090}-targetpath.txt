@@ -8,4 +8,12 @@ Content\pacmanBas1.xnb
 Content\pacmanDroite1.xnb
 Content\pacmanGauche1.xnb
 Content\pacmanHaut1.xnb
-Content\fantomeRouge.xnb
+Content\Mort0.xnb
+Content\Mort1.xnb
+Content\Mort2.xnb
+Content\Mort3.xnb
+Content\fantome0.xnb
+Content\fantome1.xnb
+Content\fantome2.xnb
+Content\fantome3.xnb
+Content\barriereFantome.xnb

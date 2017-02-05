@@ -4,13 +4,15 @@ public enum Direction { Up, Down, Left, Right };
 
 public class Character
 {
-
+    private bool _moving; 
     private Direction _direction; 
     private Position _position; 
 
 
 	public Character(Position position, Direction direction)
 	{
+        this._moving = true;
+
         this._direction = direction; 
         this._position = position; 
 
@@ -35,6 +37,12 @@ public class Character
     {
         get { return _direction; }
         set { _direction = value; }
+    }
+
+    public bool Moving
+    {
+        get { return _moving; }
+        set { _moving = value; }
     }
 
 

@@ -23,6 +23,9 @@ namespace PacMan
         GostCharacter gostCharacterRed; // TODO : create a list of all four gosts 
         // Animated characters
         AnimatedPacMan animatedPacMan;
+        List<AnimatedGost> listAnimatedGosts;
+
+        List<GostCharacter> listGostCharacters;  
         AnimatedGost animatedGostRed; 
 
         int timer = 0;
@@ -41,7 +44,12 @@ namespace PacMan
             Content.RootDirectory = "Content";
 
             pacManCharacter = new PacManCharacter(new Position(1, 1), 3, Direction.Right);
-            gostCharacterRed = new GostCharacter(new Position(14, 14), Direction.Up); 
+            listGostCharacters = new List<GostCharacter>(); 
+            for (int i = 0; i<4; i++)
+            {
+                listGostCharacters.Add(new GostCharacter(new Position(12+i, 14), Direction.Up)); 
+            }
+            gostCharacterRed = new GostCharacter(new Position(10, 10), Direction.Up); 
 
 
 
@@ -123,7 +131,12 @@ namespace PacMan
             wall = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
-            animatedGostRed = new AnimatedGost(Content.Load<Texture2D>("fantomeRouge"), new Vector2(0f, 0f), new Vector2(20f, 20f), gostCharacterRed); 
+            listAnimatedGosts = new List<AnimatedGost>(); 
+            for (int i = 0; i<4; i++)
+            {
+                listAnimatedGosts.Add(new AnimatedGost(Content.Load<Texture2D>("fantome"+i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGostCharacters.ElementAt(i))); 
+            }
+            animatedGostRed = new AnimatedGost(Content.Load<Texture2D>("fantome0"), new Vector2(0f, 0f), new Vector2(20f, 20f), gostCharacterRed); 
 
 
         }
@@ -153,13 +166,20 @@ namespace PacMan
             if (timer%5 == 0) 
             {
                 ++counterAnimation;
+                if (pacManCharacter.Moving)
+                {
+                    move(pacManCharacter);
+                    // move(gostCharacterRed); 
+                    moveGosts();
+                    animatePacMan();
+                    getKeyboardInput();
+                } 
+                else
+                {
+                    PacManCharacterDies(); 
+                }
 
-                move(pacManCharacter);
-                // move(gostCharacterRed); 
-                moveGosts(); 
-                animatePacMan();
             }
-            getKeyboardInput();
 
             base.Update(gameTime);
 
@@ -206,9 +226,15 @@ namespace PacMan
                     }
                 }
             }
+            spriteBatch.Draw(Content.Load<Texture2D>("barriereFantome"), new Vector2(13 * 20, 12 * 20), Color.White);
 
             spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
-            spriteBatch.Draw(animatedGostRed.Texture, new Vector2(gostCharacterRed.getPostion().X * 20, gostCharacterRed.getPostion().Y * 20), Color.White);
+            for (int i=0; i<4; i++)
+            {
+                spriteBatch.Draw(listAnimatedGosts.ElementAt(i).Texture, new Vector2(listGostCharacters.ElementAt(i).getPostion().X * 20, listGostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
+
+            }
+            //
 
 
             base.Draw(gameTime);
@@ -248,10 +274,7 @@ namespace PacMan
             if (keyboard.IsKeyDown(Keys.Right))
             {
                 if (CheckNextCell(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Right;
-                
-                
-                //on vérifie s’il est possible de se déplacer
-                // si oui on avance
+              
             }
             else if (keyboard.IsKeyDown(Keys.Left))
             {
@@ -280,46 +303,51 @@ namespace PacMan
 
         public void move(Character character)
         {
-            switch (character.Direction)
+            if (character.Moving)
             {
-                case Direction.Down:
+                switch (character.Direction)
+                {
+                    case Direction.Down:
 
-                    if (CheckNextCell(character.Position.X, character.Position.Y + 1))
-                    {
-                        character.Position = new Position(character.Position.X, character.Position.Y + 1);
-                    }
+                        if (CheckNextCell(character.Position.X, character.Position.Y + 1))
+                        {
+                            character.Position = new Position(character.Position.X, character.Position.Y + 1);
+                        }
 
-                    break; 
+                        break;
 
-                case Direction.Right:
-                    if (CheckNextCell(character.Position.X + 1, character.Position.Y))
-                    {
-                        character.Position = new Position(character.Position.X + 1, character.Position.Y);
-                    }
+                    case Direction.Right:
+                        if (CheckNextCell(character.Position.X + 1, character.Position.Y))
+                        {
+                            character.Position = new Position(character.Position.X + 1, character.Position.Y);
+                        }
 
-                    break; 
+                        break;
 
-                case Direction.Left:
-                    if (CheckNextCell(character.Position.X - 1, character.Position.Y))
-                    {
-                        character.Position = new Position(character.Position.X - 1, character.Position.Y);
-                    }
-                    break; 
+                    case Direction.Left:
+                        if (CheckNextCell(character.Position.X - 1, character.Position.Y))
+                        {
+                            character.Position = new Position(character.Position.X - 1, character.Position.Y);
+                        }
+                        break;
 
-                case Direction.Up:
-                    if (CheckNextCell(character.Position.X, character.Position.Y - 1))
-                    {
-                        character.Position = new Position(character.Position.X, character.Position.Y - 1);
-                    }
+                    case Direction.Up:
+                        if (CheckNextCell(character.Position.X, character.Position.Y - 1))
+                        {
+                            character.Position = new Position(character.Position.X, character.Position.Y - 1);
+                        }
 
-                    break; 
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+
+                }
+                checkBeanEaten();
+                //checkGost 
 
             }
-            checkBeanEaten();
-            //checkGost 
+
 
         }
         public bool CheckNextCell (int x, int y)
@@ -372,30 +400,66 @@ namespace PacMan
         }
         public void moveGosts()
         {
-            Console.WriteLine("gost moves"); 
-            Position nextPosition = getNextPosition(gostCharacterRed, gostCharacterRed.Direction); 
-            bool forward = CheckNextCell(nextPosition.X, nextPosition.Y); 
-            if(forward)
+            foreach (GostCharacter gostCharacter in listGostCharacters)
             {
-                move(gostCharacterRed);
-            } else
-            {
-                bool directionAllowed = false;
-                
-                while (!directionAllowed)
+                Position nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction);
+                bool forward = CheckNextCell(nextPosition.X, nextPosition.Y);
+                if (forward && !gostCharacter.InHouse)
                 {
-                    gostCharacterRed.Direction = gostCharacterRed.randomDirection(); 
-                    nextPosition = getNextPosition(gostCharacterRed, gostCharacterRed.Direction);
-                    directionAllowed = CheckNextCell(nextPosition.X, nextPosition.Y); 
+                    move(gostCharacter);
                 }
-                gostCharacterRed.Direction = gostCharacterRed.Direction; 
-                move(gostCharacterRed);
+                else
+                {
+                    bool directionAllowed = false;
+
+                    while (!directionAllowed)
+                    {
+                        gostCharacter.Direction = gostCharacter.randomDirection();
+                        nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction);
+                        directionAllowed = CheckNextCell(nextPosition.X, nextPosition.Y);
+                    }
+                    gostCharacter.Direction = gostCharacter.Direction;
+                    move(gostCharacter);
+
+                }
+            }
+           
+        }
+
+        public void PacManCharacterDies()
+        {
+           switch(animatedPacMan.Texture.Name)
+            {
+                case "":
+                    var texture = Content.Load<Texture2D>("Mort0");
+                    texture.Name = "Mort0";
+                    animatedPacMan.Texture = texture;
+                    break;
+                case "Mort0":
+                    texture = Content.Load<Texture2D>("Mort1");
+                    texture.Name = "Mort1";
+                    animatedPacMan.Texture = texture;
+                    break;
+                case "Mort1":
+                    texture = Content.Load<Texture2D>("Mort2");
+                    texture.Name = "Mort2";
+                    animatedPacMan.Texture = texture;
+                    break;
+                case "Mort2":
+                    texture = Content.Load<Texture2D>("Mort3");
+                    texture.Name = "Mort3";
+                    animatedPacMan.Texture = texture;
+                    //partie.over(); 
+                    break;
+                default:
+                    break; 
+
 
             }
-
-            
-
         }
+
+
+       
     }
 
     

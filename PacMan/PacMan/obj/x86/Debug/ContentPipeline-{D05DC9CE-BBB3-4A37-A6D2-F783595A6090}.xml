@@ -92,13 +92,85 @@
       <Time>2017-02-04T23:54:59.442824+01:00</Time>
     </Item>
     <Item>
-      <Source>fantomeRouge.png</Source>
-      <Name>fantomeRouge</Name>
+      <Source>Mort0.png</Source>
+      <Name>Mort0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantomeRouge.xnb</Output>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort0.xnb</Output>
+      <Time>2017-02-05T09:41:05.2607247+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Mort1.png</Source>
+      <Name>Mort1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort1.xnb</Output>
+      <Time>2017-02-05T09:41:11.3097963+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Mort2.png</Source>
+      <Name>Mort2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort2.xnb</Output>
+      <Time>2017-02-05T09:41:14.8741422+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Mort3.png</Source>
+      <Name>Mort3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort3.xnb</Output>
+      <Time>2017-02-05T09:41:18.342238+01:00</Time>
+    </Item>
+    <Item>
+      <Source>fantome0.png</Source>
+      <Name>fantome0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome0.xnb</Output>
       <Time>2017-02-04T23:54:59.4057694+01:00</Time>
+    </Item>
+    <Item>
+      <Source>fantome1.png</Source>
+      <Name>fantome1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome1.xnb</Output>
+      <Time>2017-02-05T10:04:57.9471685+01:00</Time>
+    </Item>
+    <Item>
+      <Source>fantome2.png</Source>
+      <Name>fantome2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome2.xnb</Output>
+      <Time>2017-02-05T10:05:19.8501642+01:00</Time>
+    </Item>
+    <Item>
+      <Source>fantome3.png</Source>
+      <Name>fantome3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome3.xnb</Output>
+      <Time>2017-02-05T10:05:26.6441829+01:00</Time>
+    </Item>
+    <Item>
+      <Source>barriereFantome.png</Source>
+      <Name>barriereFantome</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\barriereFantome.xnb</Output>
+      <Time>2017-02-05T10:20:07.2394554+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

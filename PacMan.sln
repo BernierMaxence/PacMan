@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacMan", "PacMan\PacMan\PacMan.csproj", "{473BE40E-EAEC-411F-8702-1D00D3FDCB6A}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "PacManContent", "PacMan\PacManContent\PacManContent.contentproj", "{D05DC9CE-BBB3-4A37-A6D2-F783595A6090}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacManContent", "PacMan\PacManContent\PacManContent.contentproj", "{D05DC9CE-BBB3-4A37-A6D2-F783595A6090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

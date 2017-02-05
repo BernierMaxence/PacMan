@@ -67,7 +67,6 @@ C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pac
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite1.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche1.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut1.xnb
-C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantomeRouge.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\PacMan.exe
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\PacMan.pdb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
@@ -80,3 +79,12 @@ C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.cspr
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.exe
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort0.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort1.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort2.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort3.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome0.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome1.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome2.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome3.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\barriereFantome.xnb

@@ -7,9 +7,15 @@ namespace PacMan
 {
     class GostCharacter : Character
     {
+        bool _inHouse; 
         public GostCharacter(Position position, Direction direction) : base(position, direction)
         {
-
+            this._inHouse = true; 
+        }
+        public bool InHouse
+        {
+            get { return _inHouse; }
+            set { _inHouse = value; }
         }
 
         public Direction randomDirection()
@@ -19,7 +25,7 @@ namespace PacMan
             allowedDirections.Add(Direction.Right);
             allowedDirections.Add(Direction.Left);
             allowedDirections.Add(Direction.Down);
-            return allowedRandomDiretion(allowedDirections); 
+            return allowedRandomDiretion(allowedDirections);
 
         }
 
@@ -37,22 +43,68 @@ namespace PacMan
             }
             
         }
+
+        /*
         public Direction nextDirection()
         {
-            switch(this.Direction)
+            List<Direction> allowedDirections = new List<Direction>();
+            allowedDirections.Add(Direction.Up);
+            allowedDirections.Add(Direction.Right);
+            allowedDirections.Add(Direction.Left);
+            allowedDirections.Add(Direction.Down);
+            return allowedNextDirection(allowedDirections);
+        }
+
+        public Direction allowedNextDirection(List<Direction> allowedDirections)
+        {
+            switch (this.Direction)
             {
                 case Direction.Down:
-                    return Direction.Right;
+                    if (allowedDirections.Contains(Direction.Right))
+                    {
+                        return Direction.Right; 
+                    }
+                    else
+                    {
+                        allowedDirections.Remove(Direction.Right);
+                        return allowedNextDirection(allowedDirections); 
+                    }
                 case Direction.Right:
-                    return Direction.Up;
+                    if (allowedDirections.Contains(Direction.Up))
+                    {
+                        return Direction.Up;
+                    }
+                    else
+                    {
+                        allowedDirections.Remove(Direction.Up);
+                        return allowedNextDirection(allowedDirections);
+                    }
                 case Direction.Up:
-                    return Direction.Left;
+                    if (allowedDirections.Contains(Direction.Left))
+                    {
+                        return Direction.Left;
+                    }
+                    else
+                    {
+                        allowedDirections.Remove(Direction.Left);
+                        return allowedNextDirection(allowedDirections);
+                    }
                 case Direction.Left:
-                    return Direction.Down;
+                    if (allowedDirections.Contains(Direction.Down))
+                    {
+                        return Direction.Down;
+                    }
+                    else
+                    {
+                        allowedDirections.Remove(Direction.Down);
+                        return allowedNextDirection(allowedDirections);
+                    }
                 default:
-                    return Direction.Down; 
+                    return Direction.Down;
             }
         }
+        */
+       
     }
     
 }

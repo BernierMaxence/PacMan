@@ -62,6 +62,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="AnimatedGost.cs" />
     <Compile Include="GostCharacter.cs" />
+    <Compile Include="OnGoingGame.cs" />
     <Compile Include="PacManCharacter.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
