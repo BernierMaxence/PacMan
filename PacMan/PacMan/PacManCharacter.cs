@@ -5,7 +5,7 @@ public class PacManCharacter : Character
     private int _life;
     private bool _power; 
     private Direction _direction; 
-	public PacManCharacter(Position position, int life, Direction direction) : base(position, direction)
+	public PacManCharacter(Position position, Position initialPosition,  int life, Direction direction) : base(position, initialPosition, direction)
 	{
        this._life = life;
         this._power = false; 

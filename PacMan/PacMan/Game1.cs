@@ -20,17 +20,16 @@ namespace PacMan
         SpriteBatch spriteBatch;
         // Characters 
         PacManCharacter pacManCharacter;
-        GhostCharacter ghostCharacterRed; // TODO : create a list of all four ghosts 
         // Animated characters
         AnimatedPacMan animatedPacMan;
         List<AnimatedGhost> listAnimatedGhosts;
 
         List<GhostCharacter> listGhostCharacters;
-        AnimatedGhost animatedghostRed;
 
         int timer = 0;
         int counterAnimation = 0;
-        int beginPower=0; 
+        int beginPower=0;
+        int beginPause; 
 
         int score = 0;
         int nbBeans = 0;
@@ -46,13 +45,12 @@ namespace PacMan
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            pacManCharacter = new PacManCharacter(new Position(1, 1), 3, Direction.Right);
+            pacManCharacter = new PacManCharacter(new Position(13, 17), new Position(15, 17),  3, Direction.Right);
             listGhostCharacters = new List<GhostCharacter>();
             for (int i = 0; i < 1; i++)
             {
-                listGhostCharacters.Add(new GhostCharacter(new Position(12 + i, 14), Direction.Up));
+                listGhostCharacters.Add(new GhostCharacter(new Position(12 + i, 14), new Position(12 + i, 14), Direction.Up));
             }
-            ghostCharacterRed = new GhostCharacter(new Position(10, 10), Direction.Up);
 
 
 
@@ -593,13 +591,21 @@ namespace PacMan
                     texture = Content.Load<Texture2D>("Mort3");
                     texture.Name = "Mort3";
                     animatedPacMan.Texture = texture;
-                    //partie.over(); 
                     break;
                 default:
+                    pacManCharacter.Position = pacManCharacter.InitialPosition; 
+                    foreach(GhostCharacter ghostCharacter in listGhostCharacters)
+                    {
+                        ghostCharacter.Position = ghostCharacter.InitialPosition;
+                    }
+                    pacManCharacter.Moving = true; 
                     break;
-
-
             }
+        }
+
+        public void ghostDies(GhostCharacter ghostCharacter)
+        {
+            ghostCharacter.Position = ghostCharacter.InitialPosition; 
         }
         
         public void detectEnemy(PacManCharacter pacManCharcter, GhostCharacter ghostCharacter)
@@ -609,8 +615,9 @@ namespace PacMan
             {
                 if (pacManCharacter.Power)
                 {
-                    //gost dies
-                } else
+                    ghostDies(ghostCharacter);
+                }
+                else
                 {
                     Console.WriteLine(pacManCharacter.Life); 
                     pacManCharacter.looseLife();

@@ -9,7 +9,7 @@ namespace PacMan
     {
         bool _inHouse;
         bool _scared; 
-        public GhostCharacter(Position position, Direction direction) : base(position, direction)
+        public GhostCharacter(Position position, Position initialPosition, Direction direction) : base(position, initialPosition, direction)
         {
             this._inHouse = true;
             this._inHouse = false;

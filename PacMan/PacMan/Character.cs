@@ -6,17 +6,21 @@ public class Character
 {
     private bool _moving; 
     private Direction _direction; 
-    private Position _position; 
+    private Position _position;
+    private Position _initialPosition;
 
 
-	public Character(Position position, Direction direction)
+
+    public Character(Position position, Position initialPosition,  Direction direction)
 	{
         this._moving = true;
 
         this._direction = direction; 
-        this._position = position; 
+        this._position = position;
+        this._initialPosition = initialPosition; 
 
-	}
+
+    }
 
     public void setPosition(Position position)
     {
@@ -31,6 +35,13 @@ public class Character
     {
         get { return _position; }
         set { _position = value; }
+    }
+
+
+    public Position InitialPosition
+    {
+        get { return _initialPosition; }
+        set { _initialPosition = value; }
     }
 
     public Direction Direction
