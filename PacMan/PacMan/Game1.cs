@@ -38,6 +38,8 @@ namespace PacMan
         AnimatedObject wall;
         AnimatedObject bean;
 
+        AnimatedObject bigBean;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -51,10 +53,7 @@ namespace PacMan
             }
             gostCharacterRed = new GostCharacter(new Position(10, 10), Direction.Up); 
 
-
-
-            AnimatedObject wall;
-            AnimatedObject bean;
+           
 
             map = new byte[31, 28]{
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -97,6 +96,7 @@ namespace PacMan
                     {
                         nbBeans++;
                     }
+                   // else if (map[x, y] ==3)
                 }
             }
 
@@ -130,6 +130,8 @@ namespace PacMan
             // on charge un objet mur 
             wall = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+
+            bigBean = new AnimatedObject(Content.Load<Texture2D>("gros_bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
             listAnimatedGosts = new List<AnimatedGost>(); 
             for (int i = 0; i<1; i++)
@@ -168,7 +170,7 @@ namespace PacMan
                 ++counterAnimation;
                 if (pacManCharacter.Moving)
                 {
-                    move(pacManCharacter);
+                    movePacMan();
                     // move(gostCharacterRed); 
                     moveGosts();
                     animatePacMan();
@@ -224,6 +226,14 @@ namespace PacMan
                         Vector2 pos = new Vector2(ypos, xpos);
                         spriteBatch.Draw(bean.Texture, pos, Color.White);
                     }
+                    else if (map[x, y] == 3)
+                    {
+                        int xpos, ypos;
+                        xpos = x * 20;
+                        ypos = y * 20;
+                        Vector2 pos = new Vector2(ypos, xpos);
+                        spriteBatch.Draw(bigBean.Texture, pos, Color.White);
+                    }
                 }
             }
             spriteBatch.Draw(Content.Load<Texture2D>("barriereFantome"), new Vector2(13 * 20, 12 * 20), Color.White);
@@ -273,35 +283,23 @@ namespace PacMan
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                if (CheckNextCell(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Right;
-              
+                if (CheckNextCellForPacMan(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Right;
             }
             else if (keyboard.IsKeyDown(Keys.Left))
             {
-                if (CheckNextCell(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Left;
-                
-                //on vérifie s’il est possible de se déplacer
-                // si oui on avance
+                if (CheckNextCellForPacMan(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y)) pacManCharacter.Direction = Direction.Left;
             }
             else if (keyboard.IsKeyDown(Keys.Up))
             {
-                if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y-1)) pacManCharacter.Direction = Direction.Up;
-                
-                //on vérifie s’il est possible de se déplacer
-                // si oui on avance
+                if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y-1)) pacManCharacter.Direction = Direction.Up;
             }
             else if (keyboard.IsKeyDown(Keys.Down))
             {
-                if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1)) pacManCharacter.Direction = Direction.Down;
-                
-                
-                
-                //on vérifie s’il est possible de se déplacer
-                // si oui on avance
+                if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1)) pacManCharacter.Direction = Direction.Down;
             }
         }
 
-        public void move(Character character)
+        public void moveGost(Character character)
         {
             if (character.Moving)
             {
@@ -309,7 +307,7 @@ namespace PacMan
                 {
                     case Direction.Down:
 
-                        if (CheckNextCell(character.Position.X, character.Position.Y + 1))
+                        if (CheckNextCellForGost(character.Position.X, character.Position.Y + 1))
                         {
                             character.Position = new Position(character.Position.X, character.Position.Y + 1);
                         }
@@ -317,7 +315,7 @@ namespace PacMan
                         break;
 
                     case Direction.Right:
-                        if (CheckNextCell(character.Position.X + 1, character.Position.Y))
+                        if (CheckNextCellForGost(character.Position.X + 1, character.Position.Y))
                         {
                             character.Position = new Position(character.Position.X + 1, character.Position.Y);
                         }
@@ -325,16 +323,61 @@ namespace PacMan
                         break;
 
                     case Direction.Left:
-                        if (CheckNextCell(character.Position.X - 1, character.Position.Y))
+                        if (CheckNextCellForGost(character.Position.X - 1, character.Position.Y))
                         {
                             character.Position = new Position(character.Position.X - 1, character.Position.Y);
                         }
                         break;
 
                     case Direction.Up:
-                        if (CheckNextCell(character.Position.X, character.Position.Y - 1))
+                        if (CheckNextCellForGost(character.Position.X, character.Position.Y - 1))
                         {
                             character.Position = new Position(character.Position.X, character.Position.Y - 1);
+                        }
+
+                        break;
+
+                    default:
+                        break;
+
+                }
+
+            }
+        }
+            public void movePacMan()
+        {
+            if (pacManCharacter.Moving)
+            {
+                switch (pacManCharacter.Direction)
+                {
+                    case Direction.Down:
+
+                        if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1))
+                        {
+                            pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1);
+                        }
+
+                        break;
+
+                    case Direction.Right:
+                        if (CheckNextCellForPacMan(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y))
+                        {
+                            pacManCharacter.Position = new Position(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y);
+                        }
+
+                        break;
+
+                    case Direction.Left:
+                        if (CheckNextCellForPacMan(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y))
+                        {
+                            pacManCharacter.Position = new Position(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y);
+                        }
+                        break;
+
+                    case Direction.Up:
+                        if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1))
+                        {
+                            pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1);
                         }
 
                         break;
@@ -350,18 +393,33 @@ namespace PacMan
 
 
         }
-        public bool CheckNextCell (int x, int y)
+        public bool CheckNextCellForGost(int x, int y)
         {
+
 
             if (y > 0 && y < 31 && x > 0 && x < 28)
             {
                 if (map[y, x] == 0) return false;
                 else return true;
             }
-            else return false; 
-            
+            else return false;
 
-           
+
+
+        }
+        public bool CheckNextCellForPacMan(int x, int y)
+        {
+
+
+            if (y > 0 && y < 31 && x > 0 && x < 28)
+            {
+                if (map[y, x] == 0 || map[y, x] == 2) return false;
+                else return true;
+            }
+            else return false;
+
+
+
         }
 
         public void checkBeanEaten()
@@ -403,7 +461,7 @@ namespace PacMan
             foreach (GostCharacter gostCharacter in listGostCharacters)
             {
                 Position nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction);
-                bool forward = CheckNextCell(nextPosition.X, nextPosition.Y);
+                bool forward = CheckNextCellForGost(nextPosition.X, nextPosition.Y);
 
                 if ((gostCharacter.Position.X == 13 || gostCharacter.Position.X == 14) && gostCharacter.Position.Y == 13)
                 {
@@ -415,7 +473,7 @@ namespace PacMan
 
                 if (forward)
                 { 
-                    move(gostCharacter);
+                    moveGost(gostCharacter);
                 }
                 else
                 {
@@ -426,7 +484,7 @@ namespace PacMan
                     {
                         gostCharacter.Direction = gostCharacter.randomDirection();
                         nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction); 
-                        directionAllowed = CheckNextCell(nextPosition.X, nextPosition.Y);
+                        directionAllowed = CheckNextCellForGost(nextPosition.X, nextPosition.Y);
                         
                         if ((nextPosition.X == 13|| nextPosition.X == 14) && nextPosition.Y == 13)
                         {
@@ -443,7 +501,7 @@ namespace PacMan
 
                     }
                     gostCharacter.Direction = gostCharacter.Direction;
-                    move(gostCharacter);
+                    moveGost(gostCharacter);
 
                 }
             }

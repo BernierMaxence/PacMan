@@ -88,3 +88,4 @@ C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fan
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome2.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome3.xnb
 C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\barriereFantome.xnb
+C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\gros_bean.xnb

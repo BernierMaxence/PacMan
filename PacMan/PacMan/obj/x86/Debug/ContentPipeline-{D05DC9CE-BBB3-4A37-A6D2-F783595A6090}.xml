@@ -172,6 +172,15 @@
       <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\barriereFantome.xnb</Output>
       <Time>2017-02-05T10:20:07.2394554+01:00</Time>
     </Item>
+    <Item>
+      <Source>gros_bean.png</Source>
+      <Name>gros_bean</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Scar-isu\Desktop\Maxence\PacMan\PacMan\PacMan\bin\x86\Debug\Content\gros_bean.xnb</Output>
+      <Time>2017-02-05T11:02:25.0766863+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{D05DC9CE-BBB3-4A37-A6D2-F783595A6090}</ContentProjectGUID>
