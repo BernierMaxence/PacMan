@@ -18,3 +18,5 @@ Content\fantome2.xnb
 Content\fantome3.xnb
 Content\barriereFantome.xnb
 Content\gros_bean.xnb
+Content\FantomePeur0.xnb
+Content\FantomePeur1.xnb

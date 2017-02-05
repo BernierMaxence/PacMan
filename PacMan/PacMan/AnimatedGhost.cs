@@ -7,11 +7,11 @@ using System.Text;
 
 namespace PacMan
 {
-    class Animatedghost : AnimatedObject
+    class AnimatedGhost : AnimatedObject
     {
         private GhostCharacter _ghostCharacter;
          
-        public Animatedghost(Texture2D texture, Vector2 position, Vector2 size, GhostCharacter ghostCharacter) : base(texture, position, size)
+        public AnimatedGhost(Texture2D texture, Vector2 position, Vector2 size, GhostCharacter ghostCharacter) : base(texture, position, size)
         {
             this._ghostCharacter = ghostCharacter; 
 

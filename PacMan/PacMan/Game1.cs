@@ -23,13 +23,14 @@ namespace PacMan
         GhostCharacter ghostCharacterRed; // TODO : create a list of all four ghosts 
         // Animated characters
         AnimatedPacMan animatedPacMan;
-        List<Animatedghost> listAnimatedGhosts;
+        List<AnimatedGhost> listAnimatedGhosts;
 
         List<GhostCharacter> listGhostCharacters;
-        Animatedghost animatedghostRed;
+        AnimatedGhost animatedghostRed;
 
         int timer = 0;
         int counterAnimation = 0;
+        int beginPower=0; 
 
         int score = 0;
         int nbBeans = 0;
@@ -133,10 +134,10 @@ namespace PacMan
 
             bigBean = new AnimatedObject(Content.Load<Texture2D>("gros_bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
-            listAnimatedGhosts = new List<Animatedghost>();
+            listAnimatedGhosts = new List<AnimatedGhost>();
             for (int i = 0; i < 1; i++)
             {
-                listAnimatedGhosts.Add(new Animatedghost(Content.Load<Texture2D>("fantome" + i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGhostCharacters.ElementAt(i)));
+                listAnimatedGhosts.Add(new AnimatedGhost(Content.Load<Texture2D>("fantome" + i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGhostCharacters.ElementAt(i)));
             }
 
 
@@ -172,6 +173,7 @@ namespace PacMan
                     movePacMan();
                     // move(ghostCharacterRed); 
                     moveghosts();
+                   // pacManPower(beginPower-timer); 
                     animatePacMan();
                     getKeyboardInput();
                 }
@@ -278,6 +280,12 @@ namespace PacMan
                     break;
             }
         }
+
+
+        
+
+
+
         public void getKeyboardInput()
         {
             KeyboardState keyboard = Keyboard.GetState();
@@ -387,6 +395,15 @@ namespace PacMan
 
                 }
                 checkBeanEaten();
+                if (beginPower != 0)
+                {
+                    pacManPower( timer- beginPower);
+
+                    Console.WriteLine("timer : " + timer);
+                    Console.WriteLine("beginPower : " + beginPower);
+                    Console.WriteLine("diff : " + ( timer-beginPower)); 
+                }
+
                 //checkghost 
 
             }
@@ -417,6 +434,7 @@ namespace PacMan
             int xPos = pacManCharacter.Position.X;
             int yPos = pacManCharacter.Position.Y;
             int content = map[yPos, xPos];
+            Console.WriteLine("content : " + content); 
             if (content == 1)
             {
                 map[yPos, xPos] = 10;
@@ -425,13 +443,60 @@ namespace PacMan
             }
             else if (content == 3)
             {
+                Console.WriteLine("setting begin ");
+                map[yPos, xPos] = 10;
+
+                beginPower = timer; 
+                pacManPower(0); 
+            }
+        }
+
+        public void pacManPower(int time)
+        {
+            if (time == 0) { 
                 pacManCharacter.Power = true;
                 foreach (GhostCharacter ghostCharacter in listGhostCharacters)
                 {
                     ghostCharacter.Scared = true;
                 }
+
+
+
+                foreach (AnimatedGhost animatedGhost in listAnimatedGhosts)
+                {
+                    animatedGhost.Texture = Content.Load<Texture2D>("fantomePeur0");             
+                }
+
+
+
+            } else if (time > 400 && time <501)
+            {
+                foreach (AnimatedGhost animatedGhost in listAnimatedGhosts)
+                {
+                    if (counterAnimation % 2 == 0) animatedGhost.Texture = Content.Load<Texture2D>("fantomePeur0");
+                    else animatedGhost.Texture = Content.Load<Texture2D>("fantomePeur1");
+                }
+            } else if (time >500)
+            {
+                for  (int i = 0; i<1; i++)
+                {
+                    listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" +i);
+                }
+                foreach (GhostCharacter ghostCharacter in listGhostCharacters)
+                {
+                    ghostCharacter.Scared = false;
+                }
+                pacManCharacter.Power = false;
+                beginPower = 0; 
+
+
             }
+
         }
+        
+
+
+
 
         public Position getNextPosition(Character character, Direction direction)
         {
@@ -536,7 +601,15 @@ namespace PacMan
 
             }
         }
+        /*
+        public void detectEnemy(PacManCharacter pacManCharcter, GhostCharacter ghostCharacter)
+        {
+            if (pacManCharcter.Position.X == ghostCharacter.Position.X && pacManCharcter.Position.Y == ghostCharacter.Position.Y )
+            {
 
+            }
+        }
+        */
 
     }
 }
