@@ -7,17 +7,24 @@ namespace PacMan
 {
     class GostCharacter : Character
     {
-        bool _inHouse; 
+        bool _inHouse;
+        bool _scared; 
         public GostCharacter(Position position, Direction direction) : base(position, direction)
         {
-            this._inHouse = true; 
+            this._inHouse = true;
+            this._inHouse = false;
         }
         public bool InHouse
         {
             get { return _inHouse; }
             set { _inHouse = value; }
         }
-
+        
+        public bool Scared
+        {
+            get { return _scared; }
+            set { _scared = value; }
+        }
         public Direction randomDirection()
         {
             List<Direction> allowedDirections = new List<Direction>();

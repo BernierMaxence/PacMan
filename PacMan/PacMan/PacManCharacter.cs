@@ -3,13 +3,20 @@
 public class PacManCharacter : Character 
 {
     private int _life;
+    private bool _power; 
     private Direction _direction; 
 	public PacManCharacter(Position position, int life, Direction direction) : base(position, direction)
 	{
        this._life = life;
+        this._power = false; 
         this._direction = direction; 
 	}
 
+    public bool Power
+    {
+        get { return _power;}
+        set {_power= value; }
+    }
     public int getLife()
     {
         return _life; 

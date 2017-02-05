@@ -45,7 +45,7 @@ namespace PacMan
 
             pacManCharacter = new PacManCharacter(new Position(1, 1), 3, Direction.Right);
             listGostCharacters = new List<GostCharacter>(); 
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i<1; i++)
             {
                 listGostCharacters.Add(new GostCharacter(new Position(12+i, 14), Direction.Up)); 
             }
@@ -132,7 +132,7 @@ namespace PacMan
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
             listAnimatedGosts = new List<AnimatedGost>(); 
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i<1; i++)
             {
                 listAnimatedGosts.Add(new AnimatedGost(Content.Load<Texture2D>("fantome"+i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGostCharacters.ElementAt(i))); 
             }
@@ -163,7 +163,7 @@ namespace PacMan
 
             // TODO: Add your update logic here
             ++timer;
-            if (timer%5 == 0) 
+            if (timer%5== 0) 
             {
                 ++counterAnimation;
                 if (pacManCharacter.Moving)
@@ -229,7 +229,7 @@ namespace PacMan
             spriteBatch.Draw(Content.Load<Texture2D>("barriereFantome"), new Vector2(13 * 20, 12 * 20), Color.White);
 
             spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
-            for (int i=0; i<4; i++)
+            for (int i=0; i<1; i++)
             {
                 spriteBatch.Draw(listAnimatedGosts.ElementAt(i).Texture, new Vector2(listGostCharacters.ElementAt(i).getPostion().X * 20, listGostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
 
@@ -404,19 +404,43 @@ namespace PacMan
             {
                 Position nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction);
                 bool forward = CheckNextCell(nextPosition.X, nextPosition.Y);
-                if (forward && !gostCharacter.InHouse)
+
+                if ((gostCharacter.Position.X == 13 || gostCharacter.Position.X == 14) && gostCharacter.Position.Y == 13)
                 {
+                    gostCharacter.InHouse = !gostCharacter.InHouse;
+                    forward = true;
+                    gostCharacter.Direction = Direction.Up; 
+                  
+                }
+
+                if (forward)
+                { 
                     move(gostCharacter);
                 }
                 else
                 {
+                    
                     bool directionAllowed = false;
 
                     while (!directionAllowed)
                     {
                         gostCharacter.Direction = gostCharacter.randomDirection();
-                        nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction);
+                        nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction); 
                         directionAllowed = CheckNextCell(nextPosition.X, nextPosition.Y);
+                        
+                        if ((nextPosition.X == 13|| nextPosition.X == 14) && nextPosition.Y == 13)
+                        {
+                            if (gostCharacter.Scared)
+                            {
+                                directionAllowed = true;  
+                            } else
+                            {
+                                directionAllowed = false;
+
+                            }
+                        }
+
+
                     }
                     gostCharacter.Direction = gostCharacter.Direction;
                     move(gostCharacter);
