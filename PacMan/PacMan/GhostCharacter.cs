@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PacMan
 {
-    class GhostCharacter : Character
+    public class GhostCharacter : Character
     {
         bool _inHouse;
         bool _scared; 

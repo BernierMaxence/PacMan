@@ -349,7 +349,7 @@ namespace PacMan
                         break;
 
                 }
-
+                detectEnemy(pacManCharacter, (GhostCharacter)character); 
             }
         }
         public void movePacMan()
@@ -398,10 +398,12 @@ namespace PacMan
                 if (beginPower != 0)
                 {
                     pacManPower( timer- beginPower);
+                }
 
-                    Console.WriteLine("timer : " + timer);
-                    Console.WriteLine("beginPower : " + beginPower);
-                    Console.WriteLine("diff : " + ( timer-beginPower)); 
+                foreach(GhostCharacter gostCharacter in listGhostCharacters)
+                {
+                    detectEnemy(pacManCharacter, gostCharacter); 
+
                 }
 
                 //checkghost 
@@ -434,7 +436,6 @@ namespace PacMan
             int xPos = pacManCharacter.Position.X;
             int yPos = pacManCharacter.Position.Y;
             int content = map[yPos, xPos];
-            Console.WriteLine("content : " + content); 
             if (content == 1)
             {
                 map[yPos, xPos] = 10;
@@ -443,7 +444,6 @@ namespace PacMan
             }
             else if (content == 3)
             {
-                Console.WriteLine("setting begin ");
                 map[yPos, xPos] = 10;
 
                 beginPower = timer; 
@@ -601,15 +601,24 @@ namespace PacMan
 
             }
         }
-        /*
+        
         public void detectEnemy(PacManCharacter pacManCharcter, GhostCharacter ghostCharacter)
         {
+            
             if (pacManCharcter.Position.X == ghostCharacter.Position.X && pacManCharcter.Position.Y == ghostCharacter.Position.Y )
             {
-
+                if (pacManCharacter.Power)
+                {
+                    //gost dies
+                } else
+                {
+                    Console.WriteLine(pacManCharacter.Life); 
+                    pacManCharacter.looseLife();
+                    pacManCharacter.Moving = false; 
+                }
             }
         }
-        */
+        
 
     }
 }

@@ -14,17 +14,16 @@ public class PacManCharacter : Character
 
     public bool Power
     {
-        get { return _power;}
-        set {_power= value; }
+        get { return _power ; }
+        set { _power = value; }
     }
-    public int getLife()
+
+    public int Life
     {
-        return _life; 
+        get { return _life; }
+        set { _life = value; }
     }
-    public void setLife(int life)
-    {
-        this._life = life; 
-    }
+    
 
     public void looseLife()
     {
