@@ -154,8 +154,9 @@ namespace PacMan
             {
                 ++counterAnimation;
 
-                move();
-                moveGost(); 
+                move(pacManCharacter);
+                // move(gostCharacterRed); 
+                moveGosts(); 
                 animatePacMan();
             }
             getKeyboardInput();
@@ -277,38 +278,38 @@ namespace PacMan
             }
         }
 
-        public void move()
+        public void move(Character character)
         {
-            switch (pacManCharacter.Direction)
+            switch (character.Direction)
             {
                 case Direction.Down:
 
-                    if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1))
+                    if (CheckNextCell(character.Position.X, character.Position.Y + 1))
                     {
-                        pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1);
+                        character.Position = new Position(character.Position.X, character.Position.Y + 1);
                     }
 
                     break; 
 
                 case Direction.Right:
-                    if (CheckNextCell(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y))
+                    if (CheckNextCell(character.Position.X + 1, character.Position.Y))
                     {
-                        pacManCharacter.Position = new Position(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y);
+                        character.Position = new Position(character.Position.X + 1, character.Position.Y);
                     }
 
                     break; 
 
                 case Direction.Left:
-                    if (CheckNextCell(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y))
+                    if (CheckNextCell(character.Position.X - 1, character.Position.Y))
                     {
-                        pacManCharacter.Position = new Position(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y);
+                        character.Position = new Position(character.Position.X - 1, character.Position.Y);
                     }
                     break; 
 
                 case Direction.Up:
-                    if (CheckNextCell(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1))
+                    if (CheckNextCell(character.Position.X, character.Position.Y - 1))
                     {
-                        pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1);
+                        character.Position = new Position(character.Position.X, character.Position.Y - 1);
                     }
 
                     break; 
@@ -348,9 +349,48 @@ namespace PacMan
             }
         }
 
-        public void moveGost()
+        public Position getNextPosition(Character character, Direction direction)
         {
-            
+            switch (direction)
+            {
+                case Direction.Down:
+                    return new Position(character.Position.X, character.Position.Y + 1);
+
+                case Direction.Right:
+                    return new Position(character.Position.X + 1, character.Position.Y);
+
+                case Direction.Left:
+                    return new Position(character.Position.X - 1, character.Position.Y);
+
+                case Direction.Up:
+                    return new Position(character.Position.X, character.Position.Y - 1);
+
+
+                default:
+                    return null;
+            }
+        }
+        public void moveGosts()
+        {
+            Position nextPosition = getNextPosition(gostCharacterRed, gostCharacterRed.Direction); 
+            bool forward = CheckNextCell(nextPosition.X, nextPosition.Y); 
+            if(forward)
+            {
+                move(gostCharacterRed);
+            } else
+            {
+                bool directionAllowed = false;
+                
+                while (!directionAllowed)
+                {
+                    gostCharacterRed.Direction = gostCharacterRed.nextDirection(); 
+                    nextPosition = getNextPosition(gostCharacterRed, gostCharacterRed.Direction);
+                    directionAllowed = CheckNextCell(nextPosition.X, nextPosition.Y); 
+                }
+                gostCharacterRed.Direction = gostCharacterRed.Direction; 
+                move(gostCharacterRed);
+
+            }
 
             
 
