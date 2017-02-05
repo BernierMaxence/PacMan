@@ -5,11 +5,11 @@ using System.Text;
 
 namespace PacMan
 {
-    class GostCharacter : Character
+    class GhostCharacter : Character
     {
         bool _inHouse;
         bool _scared; 
-        public GostCharacter(Position position, Direction direction) : base(position, direction)
+        public GhostCharacter(Position position, Direction direction) : base(position, direction)
         {
             this._inHouse = true;
             this._inHouse = false;

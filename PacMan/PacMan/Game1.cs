@@ -20,16 +20,16 @@ namespace PacMan
         SpriteBatch spriteBatch;
         // Characters 
         PacManCharacter pacManCharacter;
-        GostCharacter gostCharacterRed; // TODO : create a list of all four gosts 
+        GhostCharacter ghostCharacterRed; // TODO : create a list of all four ghosts 
         // Animated characters
         AnimatedPacMan animatedPacMan;
-        List<AnimatedGost> listAnimatedGosts;
+        List<Animatedghost> listAnimatedGhosts;
 
-        List<GostCharacter> listGostCharacters;  
-        AnimatedGost animatedGostRed; 
+        List<GhostCharacter> listGhostCharacters;
+        Animatedghost animatedghostRed;
 
         int timer = 0;
-        int counterAnimation =0;
+        int counterAnimation = 0;
 
         int score = 0;
         int nbBeans = 0;
@@ -46,14 +46,14 @@ namespace PacMan
             Content.RootDirectory = "Content";
 
             pacManCharacter = new PacManCharacter(new Position(1, 1), 3, Direction.Right);
-            listGostCharacters = new List<GostCharacter>(); 
-            for (int i = 0; i<1; i++)
+            listGhostCharacters = new List<GhostCharacter>();
+            for (int i = 0; i < 1; i++)
             {
-                listGostCharacters.Add(new GostCharacter(new Position(12+i, 14), Direction.Up)); 
+                listGhostCharacters.Add(new GhostCharacter(new Position(12 + i, 14), Direction.Up));
             }
-            gostCharacterRed = new GostCharacter(new Position(10, 10), Direction.Up); 
+            ghostCharacterRed = new GhostCharacter(new Position(10, 10), Direction.Up);
 
-           
+
 
             map = new byte[31, 28]{
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -96,7 +96,7 @@ namespace PacMan
                     {
                         nbBeans++;
                     }
-                   // else if (map[x, y] ==3)
+                    // else if (map[x, y] ==3)
                 }
             }
 
@@ -133,12 +133,11 @@ namespace PacMan
 
             bigBean = new AnimatedObject(Content.Load<Texture2D>("gros_bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
-            listAnimatedGosts = new List<AnimatedGost>(); 
-            for (int i = 0; i<1; i++)
+            listAnimatedGhosts = new List<Animatedghost>();
+            for (int i = 0; i < 1; i++)
             {
-                listAnimatedGosts.Add(new AnimatedGost(Content.Load<Texture2D>("fantome"+i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGostCharacters.ElementAt(i))); 
+                listAnimatedGhosts.Add(new Animatedghost(Content.Load<Texture2D>("fantome" + i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGhostCharacters.ElementAt(i)));
             }
-            animatedGostRed = new AnimatedGost(Content.Load<Texture2D>("fantome0"), new Vector2(0f, 0f), new Vector2(20f, 20f), gostCharacterRed); 
 
 
         }
@@ -165,28 +164,29 @@ namespace PacMan
 
             // TODO: Add your update logic here
             ++timer;
-            if (timer%5== 0) 
+            if (timer % 5 == 0)
             {
                 ++counterAnimation;
                 if (pacManCharacter.Moving)
                 {
                     movePacMan();
-                    // move(gostCharacterRed); 
-                    moveGosts();
+                    // move(ghostCharacterRed); 
+                    moveghosts();
                     animatePacMan();
                     getKeyboardInput();
-                } 
+                }
                 else
                 {
-                    PacManCharacterDies(); 
+                    PacManCharacterDies();
                 }
 
             }
 
             base.Update(gameTime);
 
-            if(nbBeans == 0) {
-               // MessageBox.Show("Tout ramassé");
+            if (nbBeans == 0)
+            {
+                // MessageBox.Show("Tout ramassé");
                 Exit();
             }
 
@@ -239,9 +239,9 @@ namespace PacMan
             spriteBatch.Draw(Content.Load<Texture2D>("barriereFantome"), new Vector2(13 * 20, 12 * 20), Color.White);
 
             spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
-            for (int i=0; i<1; i++)
+            for (int i = 0; i < 1; i++)
             {
-                spriteBatch.Draw(listAnimatedGosts.ElementAt(i).Texture, new Vector2(listGostCharacters.ElementAt(i).getPostion().X * 20, listGostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
+                spriteBatch.Draw(listAnimatedGhosts.ElementAt(i).Texture, new Vector2(listGhostCharacters.ElementAt(i).getPostion().X * 20, listGhostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
 
             }
             //
@@ -255,7 +255,7 @@ namespace PacMan
             switch (pacManCharacter.Direction)
             {
                 case Direction.Down:
-                    if (counterAnimation%2 == 0) animatedPacMan.Texture = Content.Load<Texture2D>("pacmanBas0");
+                    if (counterAnimation % 2 == 0) animatedPacMan.Texture = Content.Load<Texture2D>("pacmanBas0");
                     else animatedPacMan.Texture = Content.Load<Texture2D>("pacmanBas1");
 
                     break;
@@ -291,7 +291,7 @@ namespace PacMan
             }
             else if (keyboard.IsKeyDown(Keys.Up))
             {
-                if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y-1)) pacManCharacter.Direction = Direction.Up;
+                if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1)) pacManCharacter.Direction = Direction.Up;
             }
             else if (keyboard.IsKeyDown(Keys.Down))
             {
@@ -299,7 +299,7 @@ namespace PacMan
             }
         }
 
-        public void moveGost(Character character)
+        public void moveghost(Character character)
         {
             if (character.Moving)
             {
@@ -307,7 +307,7 @@ namespace PacMan
                 {
                     case Direction.Down:
 
-                        if (CheckNextCellForGost(character.Position.X, character.Position.Y + 1))
+                        if (CheckNextCellForghost(character.Position.X, character.Position.Y + 1))
                         {
                             character.Position = new Position(character.Position.X, character.Position.Y + 1);
                         }
@@ -315,7 +315,7 @@ namespace PacMan
                         break;
 
                     case Direction.Right:
-                        if (CheckNextCellForGost(character.Position.X + 1, character.Position.Y))
+                        if (CheckNextCellForghost(character.Position.X + 1, character.Position.Y))
                         {
                             character.Position = new Position(character.Position.X + 1, character.Position.Y);
                         }
@@ -323,14 +323,14 @@ namespace PacMan
                         break;
 
                     case Direction.Left:
-                        if (CheckNextCellForGost(character.Position.X - 1, character.Position.Y))
+                        if (CheckNextCellForghost(character.Position.X - 1, character.Position.Y))
                         {
                             character.Position = new Position(character.Position.X - 1, character.Position.Y);
                         }
                         break;
 
                     case Direction.Up:
-                        if (CheckNextCellForGost(character.Position.X, character.Position.Y - 1))
+                        if (CheckNextCellForghost(character.Position.X, character.Position.Y - 1))
                         {
                             character.Position = new Position(character.Position.X, character.Position.Y - 1);
                         }
@@ -344,7 +344,7 @@ namespace PacMan
 
             }
         }
-            public void movePacMan()
+        public void movePacMan()
         {
             if (pacManCharacter.Moving)
             {
@@ -387,39 +387,28 @@ namespace PacMan
 
                 }
                 checkBeanEaten();
-                //checkGost 
+                //checkghost 
 
             }
-
-
         }
-        public bool CheckNextCellForGost(int x, int y)
+        public bool CheckNextCellForghost(int x, int y)
         {
-
-
             if (y > 0 && y < 31 && x > 0 && x < 28)
             {
                 if (map[y, x] == 0) return false;
                 else return true;
             }
             else return false;
-
-
-
         }
+
         public bool CheckNextCellForPacMan(int x, int y)
         {
-
-
             if (y > 0 && y < 31 && x > 0 && x < 28)
             {
                 if (map[y, x] == 0 || map[y, x] == 2) return false;
                 else return true;
             }
             else return false;
-
-
-
         }
 
         public void checkBeanEaten()
@@ -427,11 +416,20 @@ namespace PacMan
 
             int xPos = pacManCharacter.Position.X;
             int yPos = pacManCharacter.Position.Y;
-            if (map[yPos, xPos ] == 1)
+            int content = map[yPos, xPos];
+            if (content == 1)
             {
                 map[yPos, xPos] = 10;
                 nbBeans--;
                 score++;
+            }
+            else if (content == 3)
+            {
+                pacManCharacter.Power = true;
+                foreach (GhostCharacter ghostCharacter in listGhostCharacters)
+                {
+                    ghostCharacter.Scared = true;
+                }
             }
         }
 
@@ -456,61 +454,60 @@ namespace PacMan
                     return null;
             }
         }
-        public void moveGosts()
+        public void moveghosts()
         {
-            foreach (GostCharacter gostCharacter in listGostCharacters)
+            foreach (GhostCharacter ghostCharacter in listGhostCharacters)
             {
-                Position nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction);
-                bool forward = CheckNextCellForGost(nextPosition.X, nextPosition.Y);
+                Position nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
+                bool forward = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
 
-                if ((gostCharacter.Position.X == 13 || gostCharacter.Position.X == 14) && gostCharacter.Position.Y == 13)
+                if ((ghostCharacter.Position.X == 13 || ghostCharacter.Position.X == 14) && ghostCharacter.Position.Y == 13)
                 {
-                    gostCharacter.InHouse = !gostCharacter.InHouse;
+                    ghostCharacter.InHouse = !ghostCharacter.InHouse;
                     forward = true;
-                    gostCharacter.Direction = Direction.Up; 
-                  
+                    ghostCharacter.Direction = Direction.Up;
+
                 }
 
                 if (forward)
-                { 
-                    moveGost(gostCharacter);
+                {
+                    moveghost(ghostCharacter);
                 }
                 else
                 {
-                    
+
                     bool directionAllowed = false;
 
                     while (!directionAllowed)
                     {
-                        gostCharacter.Direction = gostCharacter.randomDirection();
-                        nextPosition = getNextPosition(gostCharacter, gostCharacter.Direction); 
-                        directionAllowed = CheckNextCellForGost(nextPosition.X, nextPosition.Y);
-                        
-                        if ((nextPosition.X == 13|| nextPosition.X == 14) && nextPosition.Y == 13)
+                        ghostCharacter.Direction = ghostCharacter.randomDirection();
+                        nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
+                        directionAllowed = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
+
+                        if ((nextPosition.X == 13 || nextPosition.X == 14) && nextPosition.Y == 13)
                         {
-                            if (gostCharacter.Scared)
+                            if (ghostCharacter.Scared)
                             {
-                                directionAllowed = true;  
-                            } else
+                                directionAllowed = true;
+                            }
+                            else
                             {
                                 directionAllowed = false;
 
                             }
                         }
-
-
                     }
-                    gostCharacter.Direction = gostCharacter.Direction;
-                    moveGost(gostCharacter);
+                    ghostCharacter.Direction = ghostCharacter.Direction;
+                    moveghost(ghostCharacter);
 
                 }
             }
-           
+
         }
 
         public void PacManCharacterDies()
         {
-           switch(animatedPacMan.Texture.Name)
+            switch (animatedPacMan.Texture.Name)
             {
                 case "":
                     var texture = Content.Load<Texture2D>("Mort0");
@@ -534,16 +531,12 @@ namespace PacMan
                     //partie.over(); 
                     break;
                 default:
-                    break; 
+                    break;
 
 
             }
         }
 
 
-       
     }
-
-    
-
 }
