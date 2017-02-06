@@ -22,3 +22,4 @@ Content\FantomePeur0.xnb
 Content\FantomePeur1.xnb
 Content\game_over.xnb
 Content\ready.xnb
+Content\enter.xnb

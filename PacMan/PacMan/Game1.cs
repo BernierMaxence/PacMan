@@ -18,34 +18,35 @@ namespace PacMan
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         // Characters 
+        List<GhostCharacter> listGhostCharacters;
         PacManCharacter pacManCharacter;
         // Animated characters
         AnimatedPacMan animatedPacMan;
         List<AnimatedGhost> listAnimatedGhosts;
+        //Animated objects
+        AnimatedObject wall;
+        AnimatedObject bean;
+        AnimatedObject bigBean;
+
         bool restart =true; 
-
-        List<GhostCharacter> listGhostCharacters;
-
         int timer = 0;
         int counterAnimation = 0;
         int beginPower=0;
         int beginPause=0; 
-
         int score = 0;
         int nbBeans = 0;
-
         byte[,] map;
-        AnimatedObject wall;
-        AnimatedObject bean;
 
-        AnimatedObject bigBean;
+        
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            // We initialize our characters with their initial poisitions. 
             pacManCharacter = new PacManCharacter(new Position(13, 17), new Position(15, 17),  3, Direction.Right);
             listGhostCharacters = new List<GhostCharacter>();
             for (int i = 0; i < 4; i++)
@@ -53,8 +54,7 @@ namespace PacMan
                 listGhostCharacters.Add(new GhostCharacter(new Position(12 + i, 14), new Position(12 + i, 14), Direction.Up));
             }
 
-
-
+            // We initilize the map
             map = new byte[31, 28]{
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0},
@@ -88,6 +88,7 @@ namespace PacMan
             {0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
+            // We count the number of bean present on the map
             for (int x = 0; x < 31; x++)
             {
                 for (int y = 0; y < 28; y++)
@@ -96,29 +97,17 @@ namespace PacMan
                     {
                         nbBeans++;
                     }
-                    // else if (map[x, y] ==3)
                 }
             }
-
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+      
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+        
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -127,104 +116,78 @@ namespace PacMan
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 660;
             graphics.ApplyChanges();
-            // on charge un objet mur 
+
+            // Loding wall, bean and bigBean objects
             wall = new AnimatedObject(Content.Load<Texture2D>("mur"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
-
             bigBean = new AnimatedObject(Content.Load<Texture2D>("gros_bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
+
+            //Loding animated characters 
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
             listAnimatedGhosts = new List<AnimatedGhost>();
             for (int i = 0; i < 4; i++)
             {
                 listAnimatedGhosts.Add(new AnimatedGhost(Content.Load<Texture2D>("fantome" + i), new Vector2(0f, 0f), new Vector2(20f, 20f), listGhostCharacters.ElementAt(i)));
             }
-
-
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
+       
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+       
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            //Update game timer
             ++timer;
-            if (!pacManCharacter.Dead)
+            if (!pacManCharacter.Dead) // If the pacMan is not dead, we can start the game. 
             {
-
-
-                if (timer - beginPause > 200)
+                if (timer - beginPause > 200) // If the pause started at beginPause is over 200 ms, beginPause is unset.
                 {
                     beginPause = -1;
 
                 }
-                if (beginPause == -1 && (timer - beginPause > 200))
+                if (beginPause == -1) //If beginPause is unset (game not paused)
                 {
-                    restart = false;
-                    beginPause = -1;
+                    restart = false; // Stop displaying the "ready" image
 
-
-                    if (timer % 5 == 0)
+                    if (timer % 5 == 0) // Modulo 5 to slow down the display 
                     {
                         ++counterAnimation;
-                        if (pacManCharacter.Moving)
+                        if (pacManCharacter.Moving) // If pacMan is allowed to move, we update it's position and the ghosts'
                         {
                             movePacMan();
-                            // move(ghostCharacterRed); 
                             moveghosts();
-                            // pacManPower(beginPower-timer); 
-                            animatePacMan();
+                            animatePacMan(); // Allows PacMan to be animated 
                             getKeyboardInput();
                         }
                         else
                         {
-                            PacManCharacterDies();
+                            //If pacman isn't allowed to move, that means it has been eaten and is now dead 
+                            PacManCharacterDies(); 
                         }
-
                     }
 
                     base.Update(gameTime);
-
-                    if (nbBeans == 0)
+                    if (nbBeans == 0) //if there are no more beans on the map, the game stops
                     {
-                        // MessageBox.Show("Tout ramassé");
                         Exit();
                     }
                 }
             }
-            
-
-
-
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
             spriteBatch.Begin();
-
+            // Drawing wall and beans 
             for (int x = 0; x < 31; x++)
             {
                 for (int y = 0; y < 28; y++)
@@ -255,31 +218,60 @@ namespace PacMan
                     }
                 }
             }
+            // Drawing ghost fence
             spriteBatch.Draw(Content.Load<Texture2D>("barriereFantome"), new Vector2(13 * 20, 12 * 20), Color.White);
 
+            //Drawing animated objects according to the associated character
             spriteBatch.Draw(animatedPacMan.Texture, new Vector2(pacManCharacter.getPostion().X * 20, pacManCharacter.getPostion().Y * 20), Color.White);
             for (int i = 0; i < 4; i++)
             {
-                spriteBatch.Draw(listAnimatedGhosts.ElementAt(i).Texture, new Vector2(listGhostCharacters.ElementAt(i).getPostion().X * 20, listGhostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
+                if (pacManCharacter.Moving) // If the pacMan is dead, ghosts disapear before the pacman reapears 
+                {
+                    spriteBatch.Draw(listAnimatedGhosts.ElementAt(i).Texture, new Vector2(listGhostCharacters.ElementAt(i).getPostion().X * 20, listGhostCharacters.ElementAt(i).getPostion().Y * 20), Color.White);
+                }
 
             }
+            //If we restart the game, the "ready !" image displays
             if (restart)
             {
                 spriteBatch.Draw(Content.Load<Texture2D>("ready"), new Vector2(5 * 20, 5 * 20), Color.White);
-
             }
+            //If we restart the game, the "game over" and the "press enter" image display
 
             if (pacManCharacter.Dead)
             {
-                spriteBatch.Draw(Content.Load<Texture2D>("game_over"), new Vector2(4 * 20, 5 * 20), Color.White);
+                //"game over"
+                spriteBatch.Draw(Content.Load<Texture2D>("game_over"), new Vector2(7 * 20, 5 * 20), Color.White);
+                //"press enter"
+                spriteBatch.Draw(Content.Load<Texture2D>("enter"), new Vector2(3 * 20, 7 * 20), Color.White);
+                KeyboardState keyboard = Keyboard.GetState();
 
+                if (keyboard.IsKeyDown(Keys.Enter))
+                {
+                    //We reinitialize the game on the enter key pressed
+                    pacManCharacter.Dead = false;
+                    pacManCharacter.Moving = true;
+                    pacManCharacter.Direction = Direction.Right;
+                    pacManCharacter.Position = pacManCharacter.InitialPosition; 
+                    pacManCharacter.Life = 3;
+                    animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
+
+                    foreach (GhostCharacter ghostCharacter in listGhostCharacters )
+                    {
+                        ghostCharacter.Position = ghostCharacter.InitialPosition; 
+                    }
+
+                    restart = true;
+                    beginPause = timer; 
+                }
             }
-
-
+            
             base.Draw(gameTime);
             spriteBatch.End();
         }
-        public void animatePacMan()
+
+
+        public void animatePacMan() // Allows pacMan to open and close his mouth, and face the right way
         {
             switch (pacManCharacter.Direction)
             {
@@ -308,12 +300,10 @@ namespace PacMan
             }
         }
 
-
         
 
 
-
-        public void getKeyboardInput()
+        public void getKeyboardInput() //reads keybord and set new direction accordingly if possible
         {
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Right))
@@ -334,7 +324,8 @@ namespace PacMan
             }
         }
 
-        public void moveghost(Character character)
+
+        public void moveghost(Character character) // Moves ghosts according to their direction.
         {
             if (character.Moving)
             {
@@ -379,79 +370,66 @@ namespace PacMan
                 detectEnemy(pacManCharacter, (GhostCharacter)character); 
             }
         }
-        public void movePacMan()
+        public void movePacMan() //moves pacMan according to it's direction
         {
             if (pacManCharacter.Moving)
             {
+                //teleports pacMan from one side of the map to the other
                 if (pacManCharacter.Position.X == 26 && pacManCharacter.Position.Y == 14 && pacManCharacter.Direction ==Direction.Right)
                 {
                     pacManCharacter.Position = new Position(1, 14);
                 } else if (pacManCharacter.Position.X == 1 && pacManCharacter.Position.Y == 14 && pacManCharacter.Direction == Direction.Left)
                 {
                     pacManCharacter.Position = new Position(26, 14);
-
-
                 }
                 else
                 {
-
-
-
+                    //moves pacMan according to it's direction   
                     switch (pacManCharacter.Direction)
                     {
                         case Direction.Down:
 
                             if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1))
-                            {
                                 pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y + 1);
-                            }
-
                             break;
 
                         case Direction.Right:
                             if (CheckNextCellForPacMan(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y))
-                            {
                                 pacManCharacter.Position = new Position(pacManCharacter.Position.X + 1, pacManCharacter.Position.Y);
-                            }
-
                             break;
 
                         case Direction.Left:
                             if (CheckNextCellForPacMan(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y))
-                            {
                                 pacManCharacter.Position = new Position(pacManCharacter.Position.X - 1, pacManCharacter.Position.Y);
-                            }
                             break;
 
                         case Direction.Up:
                             if (CheckNextCellForPacMan(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1))
-                            {
                                 pacManCharacter.Position = new Position(pacManCharacter.Position.X, pacManCharacter.Position.Y - 1);
-                            }
-
                             break;
 
                         default:
                             break;
 
                     }
-                    checkBeanEaten();
-                    if (beginPower != 0)
+
+                    checkBeanEaten(); 
+
+                    if (beginPower != 0) // If time where power began is set, we check if pacMan should still be powerfull 
                     {
                         pacManPower(timer - beginPower);
                     }
 
-                    foreach (GhostCharacter gostCharacter in listGhostCharacters)
+                    foreach (GhostCharacter gostCharacter in listGhostCharacters) // Every time pacman moves, we detect if someone should die 
                     {
                         detectEnemy(pacManCharacter, gostCharacter);
-
-                    }
-
-                    //checkghost 
+                    } 
                 }
             }
         }
-        public bool CheckNextCellForghost(int x, int y)
+
+
+        public bool CheckNextCellForghost(int x, int y) // Checks if the next cell the ghost wants to go is allowed
         {
             if (y > 0 && y < 31 && x > 0 && x < 28)
             {
@@ -461,7 +439,7 @@ namespace PacMan
             else return false;
         }
 
-        public bool CheckNextCellForPacMan(int x, int y)
+        public bool CheckNextCellForPacMan(int x, int y) //Checks if the next cell the pacMan wants to go is allowed
         {
             if (y > 0 && y < 31 && x > 0 && x < 28)
             {
@@ -471,7 +449,7 @@ namespace PacMan
             else return false;
         }
 
-        public void checkBeanEaten()
+        public void checkBeanEaten() // Change the cell in the map when the bean is eaten 
         {
 
             int xPos = pacManCharacter.Position.X;
@@ -481,7 +459,7 @@ namespace PacMan
             {
                 map[yPos, xPos] = 10;
                 nbBeans--;
-                score++;
+                score = score+10;
             }
             else if (content == 3)
             {
@@ -494,61 +472,68 @@ namespace PacMan
 
         public void pacManPower(int time)
         {
-            if (time == 0) { 
+            if (time == 0)
+            {
                 pacManCharacter.Power = true;
                 foreach (GhostCharacter ghostCharacter in listGhostCharacters)
                 {
                     ghostCharacter.Scared = true;
                 }
-
-
-
+            } else { 
                 for (int i = 0; i < 4; i++)
                 {
                     if (listAnimatedGhosts.ElementAt(i).GhostCharacter.Scared)
                     {
-                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
+                        if (time < 401)
+                        {
+                            listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
 
-                    } else
+                        }
+
+                        /*else
+                           {
+                               listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + 1);
+
+                           }
+                        }*/
+                        else if (time > 400 && time <501)
+                        {
+                            //  if (listAnimatedGhosts.ElementAt(i).GhostCharacter.Scared)
+                            // {
+                            if (counterAnimation % 2 == 0) listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
+                            else listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur1");
+                            /*                       } else
+                                                   {
+                                                       listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome"+1);
+                                                       Console.Write("paspeur "); 
+                                                   }*/
+
+                        }
+                        else if (time > 500)
+                        {
+
+                            listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + i);
+
+                            // foreach (GhostCharacter ghostCharacter in listGhostCharacters)
+                            //{
+                            listGhostCharacters.ElementAt(i).Scared = false;
+                            //}
+                            pacManCharacter.Power = false;
+                            Console.WriteLine("pacman not power");
+
+                            beginPower = 0;
+                        }
+                    }
+                    else
                     {
-                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + 1);
+                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + i);
+                        listGhostCharacters.ElementAt(i).Scared = false;
+
 
                     }
-
                 }
-               
+
             }
-            else if (time > 40000) //&& time <501)
-            {
-                for (int i = 0; i<4; i++)
-              //  foreach (AnimatedGhost animatedGhost in listAnimatedGhosts)
-                {
-                    if (listAnimatedGhosts.ElementAt(i).GhostCharacter.Scared)
-                    {
-                        if (counterAnimation % 2 == 0) listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
-                        else listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur1");
-                    } else
-                    {
-                        listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome"+1);
-                        Console.Write("paspeur "); 
-                    }
-                    
-                }
-            } /*else if (time >500)
-            {
-                for  (int i = 0; i<4; i++)
-                {
-                    listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" +i);
-                }
-                foreach (GhostCharacter ghostCharacter in listGhostCharacters)
-                {
-                    ghostCharacter.Scared = false;
-                }
-                pacManCharacter.Power = false;
-                beginPower = 0; 
-
-
-            }*/
 
         }
         
@@ -654,16 +639,25 @@ namespace PacMan
                     animatedPacMan.Texture = texture;
                     break;
                 default:
-                    pacManCharacter.Position = pacManCharacter.InitialPosition; 
-                    foreach(GhostCharacter ghostCharacter in listGhostCharacters)
+                    if (pacManCharacter.Life == 0)
                     {
-                        ghostCharacter.Position = ghostCharacter.InitialPosition;
+                        pacManCharacter.Dead = true;
                     }
-                    animatedPacMan.Texture = Content.Load<Texture2D>("pacmanDroite0");
-                    pacManCharacter.Direction = Direction.Right; 
-                    pacManCharacter.Moving = true;
-                    restart = true;
-                    beginPause = timer; 
+                    else
+                    {
+
+                        pacManCharacter.Position = pacManCharacter.InitialPosition;
+
+                        foreach (GhostCharacter ghostCharacter in listGhostCharacters)
+                        {
+                            ghostCharacter.Position = ghostCharacter.InitialPosition;
+                        }
+                        animatedPacMan.Texture = Content.Load<Texture2D>("pacmanDroite0");
+                        pacManCharacter.Direction = Direction.Right;
+                        pacManCharacter.Moving = true;
+                        restart = true;
+                        beginPause = timer;
+                    }
                     break;
             }
         }
@@ -680,22 +674,22 @@ namespace PacMan
             
             if (pacManCharcter.Position.X == ghostCharacter.Position.X && pacManCharcter.Position.Y == ghostCharacter.Position.Y )
             {
-                if (pacManCharacter.Power)
+                if (ghostCharacter.Scared)
                 {
                     ghostDies(ghostCharacter);
+                    score = score + 200; 
                 }
                 else
                 {
-                    if (pacManCharacter.Life >0)
+                    if (pacManCharacter.Life > 0)
                     {
                         pacManCharacter.looseLife();
-                    } else
-                    {
-                        pacManCharacter.Dead = true; 
-                    }
-                    
 
-                    pacManCharacter.Moving = false; 
+
+                        pacManCharacter.Moving = false;
+
+                    }
+
                 }
             }
         }
