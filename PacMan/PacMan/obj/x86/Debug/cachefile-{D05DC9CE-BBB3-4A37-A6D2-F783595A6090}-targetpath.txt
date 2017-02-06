@@ -23,3 +23,10 @@ Content\FantomePeur1.xnb
 Content\game_over.xnb
 Content\ready.xnb
 Content\enter.xnb
+Content\SpriteFont1.xnb
+Content\Invincible.xnb
+Content\MonsterEaten.xnb
+Content\PacmanEaten.xnb
+Content\PelletEat1.xnb
+Content\PelletEat2.xnb
+Content\Siren.xnb

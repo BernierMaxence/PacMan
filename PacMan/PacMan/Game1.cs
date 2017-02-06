@@ -24,9 +24,21 @@ namespace PacMan
         AnimatedPacMan animatedPacMan;
         List<AnimatedGhost> listAnimatedGhosts;
         //Animated objects
+
         AnimatedObject wall;
         AnimatedObject bean;
         AnimatedObject bigBean;
+
+        SoundEffect beanEaten1;
+        SoundEffect beanEaten2;
+        SoundEffect pacmanDead;
+        SoundEffect ghostEaten;
+        SoundEffectInstance siren;
+        SoundEffectInstance invincible;
+
+
+        //Font
+        private SpriteFont _font;
 
         bool restart =true; 
         int timer = 0;
@@ -120,6 +132,19 @@ namespace PacMan
             bean = new AnimatedObject(Content.Load<Texture2D>("bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
             bigBean = new AnimatedObject(Content.Load<Texture2D>("gros_bean"), new Vector2(0f, 0f), new Vector2(20f, 20f));
 
+            //loading font
+            _font = Content.Load<SpriteFont>("SpriteFont1");
+
+
+            //loading sounds
+            beanEaten1 = Content.Load<SoundEffect>("PelletEat1");
+            beanEaten2 = Content.Load<SoundEffect>("PelletEat2");
+            pacmanDead = Content.Load<SoundEffect>("PacmanEaten");
+            ghostEaten = Content.Load<SoundEffect>("MonsterEaten");
+            siren = Content.Load<SoundEffect>("Siren").CreateInstance();
+            invincible = Content.Load<SoundEffect>("Invincible").CreateInstance();
+
+
             //Loding animated characters 
             animatedPacMan = new AnimatedPacMan(Content.Load<Texture2D>("pacmanDroite0"), new Vector2(0f, 0f), new Vector2(20f, 20f), pacManCharacter);
             listAnimatedGhosts = new List<AnimatedGhost>();
@@ -153,9 +178,18 @@ namespace PacMan
                 if (beginPause == -1) //If beginPause is unset (game not paused)
                 {
                     restart = false; // Stop displaying the "ready" image
-
-                    if (timer % 5 == 0) // Modulo 5 to slow down the display 
+                    if (!pacManCharacter.Power)
                     {
+                        siren.Play(); //The music starts!
+                    }
+                    else
+                    {
+                        invincible.Play();
+                    }
+
+                    if (timer % 7 == 0) // Modulo 7 to slow down the display 
+                    {
+
                         ++counterAnimation;
                         if (pacManCharacter.Moving) // If pacMan is allowed to move, we update it's position and the ghosts'
                         {
@@ -167,7 +201,9 @@ namespace PacMan
                         else
                         {
                             //If pacman isn't allowed to move, that means it has been eaten and is now dead 
-                            PacManCharacterDies(); 
+                            PacManCharacterDies();
+                            siren.Stop(); //The music stops!
+
                         }
                     }
 
@@ -264,6 +300,9 @@ namespace PacMan
                 }
             }
             
+            spriteBatch.DrawString(_font, "Score: "+ score, new Vector2(600, 40), Color.White);
+            
+
             base.Draw(gameTime);
             spriteBatch.End();
         }
@@ -434,6 +473,7 @@ namespace PacMan
             foreach (GhostCharacter ghostCharacter in listGhostCharacters)
             {
                 Position nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
+
                 bool forward = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
 
                 if ((ghostCharacter.Position.X == 13 || ghostCharacter.Position.X == 14) && ghostCharacter.Position.Y == 13) //cells corresponding to the gate
@@ -504,13 +544,19 @@ namespace PacMan
             {
                 map[yPos, xPos] = 10;
                 nbBeans--;
-                score = score+10; 
+                score = score+10;
+
+                beanEaten1.Play();
+                while (beanEaten1.IsDisposed) { }
+                beanEaten2.Play();
             }
             else if (content == 3)
             {
                 map[yPos, xPos] = 10;
                 score = score + 10;
-                beginPower = timer; 
+                beginPower = timer;
+                siren.Stop();
+                invincible.Play();
                 pacManPower(0); 
             }
         }
@@ -519,6 +565,8 @@ namespace PacMan
         {
             if (time == 0)
             {
+                
+
                 pacManCharacter.Power = true;
                 foreach (GhostCharacter ghostCharacter in listGhostCharacters)
                 {
@@ -546,12 +594,15 @@ namespace PacMan
                             listGhostCharacters.ElementAt(i).Scared = false;
                             pacManCharacter.Power = false;
                             beginPower = 0;
+                            //invincible.Stop();
+                            //siren.Play();
                         }
                     }
                     else
                     {
                         listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + i);
                         listGhostCharacters.ElementAt(i).Scared = false;
+
                     }
                 }
             }
@@ -585,6 +636,10 @@ namespace PacMan
 
         public void PacManCharacterDies() //animation of pacMan death + reinisializes for the restart 
         {
+
+            
+
+
             switch (animatedPacMan.Texture.Name)
             {
                 case "":
@@ -645,12 +700,14 @@ namespace PacMan
                 if (ghostCharacter.Scared) // If the ghost is vulnerable, it dies and pacMan wins points.
                 {
                     ghostDies(ghostCharacter);
+                    ghostEaten.Play();
                     score = score + 200; 
                 }
                 else // otherwise, pacMan dies. 
                 {
                     if (pacManCharacter.Life > 0)
                     {
+                        pacmanDead.Play();
                         pacManCharacter.looseLife();
 
 

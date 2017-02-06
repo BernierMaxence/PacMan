@@ -130,3 +130,33 @@ C:\Users\Eriwyr\Documents\Maxence\NouveauPacMan\PacMan\PacMan\obj\x86\Debug\Micr
 C:\Users\Eriwyr\Documents\Maxence\NouveauPacMan\PacMan\PacMan\obj\x86\Debug\PacMan.exe
 C:\Users\Eriwyr\Documents\Maxence\NouveauPacMan\PacMan\PacMan\obj\x86\Debug\PacMan.pdb
 C:\Users\Eriwyr\Documents\Maxence\NouveauPacMan\PacMan\PacMan\bin\x86\Debug\Content\enter.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanBas0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanBas1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanDroite1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanGauche1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\pacmanHaut1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort2.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Mort3.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome2.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\fantome3.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\barriereFantome.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\gros_bean.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\FantomePeur0.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\FantomePeur1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\game_over.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\ready.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\enter.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\SpriteFont1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Invincible.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\MonsterEaten.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\PacmanEaten.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\PelletEat1.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\PelletEat2.xnb
+C:\Users\Mathieu\Google Drive\Prog\C#\PacMan\PacMan\PacMan\bin\x86\Debug\Content\Siren.xnb
