@@ -11,9 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PacMan
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
+    
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
