@@ -370,6 +370,8 @@ namespace PacMan
                 detectEnemy(pacManCharacter, (GhostCharacter)character); 
             }
         }
+
+
         public void movePacMan() //moves pacMan according to it's direction
         {
             if (pacManCharacter.Moving)
@@ -429,6 +431,51 @@ namespace PacMan
         }
 
 
+        public void moveghosts() //moves ghosts 
+        {
+            foreach (GhostCharacter ghostCharacter in listGhostCharacters)
+            {
+                Position nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
+                bool forward = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
+
+                if ((ghostCharacter.Position.X == 13 || ghostCharacter.Position.X == 14) && ghostCharacter.Position.Y == 13) //cells corresponding to the gate
+                {
+                    ghostCharacter.InHouse = !ghostCharacter.InHouse;
+                    forward = true;
+                    ghostCharacter.Direction = Direction.Up;
+                }
+
+                if (forward)
+                {
+                    moveghost(ghostCharacter);
+                }
+                else
+                {
+                    bool directionAllowed = false;
+                    while (!directionAllowed)
+                    {
+                        ghostCharacter.Direction = ghostCharacter.randomDirection();
+                        nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
+                        directionAllowed = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
+
+                        if ((nextPosition.X == 13 || nextPosition.X == 14) && nextPosition.Y == 13)
+                        {
+                            if (ghostCharacter.Scared)
+                            {
+                                directionAllowed = true;
+                            }
+                            else
+                            {
+                                directionAllowed = false;
+                            }
+                        }
+                    }
+                    ghostCharacter.Direction = ghostCharacter.Direction;
+                    moveghost(ghostCharacter);
+                }
+            }
+        }
+
         public bool CheckNextCellForghost(int x, int y) // Checks if the next cell the ghost wants to go is allowed
         {
             if (y > 0 && y < 31 && x > 0 && x < 28)
@@ -459,18 +506,18 @@ namespace PacMan
             {
                 map[yPos, xPos] = 10;
                 nbBeans--;
-                score = score+10;
+                score = score+10; 
             }
             else if (content == 3)
             {
                 map[yPos, xPos] = 10;
-
+                score = score + 10;
                 beginPower = timer; 
                 pacManPower(0); 
             }
         }
 
-        public void pacManPower(int time)
+        public void pacManPower(int time) // Animates the ghost so that they look scared. 
         {
             if (time == 0)
             {
@@ -487,40 +534,19 @@ namespace PacMan
                         if (time < 401)
                         {
                             listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
-
                         }
-
-                        /*else
-                           {
-                               listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + 1);
-
-                           }
-                        }*/
                         else if (time > 400 && time <501)
                         {
-                            //  if (listAnimatedGhosts.ElementAt(i).GhostCharacter.Scared)
-                            // {
+                            
                             if (counterAnimation % 2 == 0) listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur0");
                             else listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantomePeur1");
-                            /*                       } else
-                                                   {
-                                                       listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome"+1);
-                                                       Console.Write("paspeur "); 
-                                                   }*/
-
+                            
                         }
                         else if (time > 500)
                         {
-
                             listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + i);
-
-                            // foreach (GhostCharacter ghostCharacter in listGhostCharacters)
-                            //{
                             listGhostCharacters.ElementAt(i).Scared = false;
-                            //}
                             pacManCharacter.Power = false;
-                            Console.WriteLine("pacman not power");
-
                             beginPower = 0;
                         }
                     }
@@ -528,20 +554,13 @@ namespace PacMan
                     {
                         listAnimatedGhosts.ElementAt(i).Texture = Content.Load<Texture2D>("fantome" + i);
                         listGhostCharacters.ElementAt(i).Scared = false;
-
-
                     }
                 }
-
             }
-
         }
         
 
-
-
-
-        public Position getNextPosition(Character character, Direction direction)
+        public Position getNextPosition(Character character, Direction direction) // returns next position according to direction 
         {
             switch (direction)
             {
@@ -562,59 +581,11 @@ namespace PacMan
                     return null;
             }
         }
-        public void moveghosts()
-        {
-            foreach (GhostCharacter ghostCharacter in listGhostCharacters)
-            {
-                Position nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
-                bool forward = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
 
-                if ((ghostCharacter.Position.X == 13 || ghostCharacter.Position.X == 14) && ghostCharacter.Position.Y == 13)
-                {
-                    
-                    ghostCharacter.InHouse = !ghostCharacter.InHouse;
-                    forward = true;
-                    ghostCharacter.Direction = Direction.Up;
 
-                }
+       
 
-                if (forward)
-                {
-                    moveghost(ghostCharacter);
-                }
-                else
-                {
-
-                    bool directionAllowed = false;
-
-                    while (!directionAllowed)
-                    {
-                        ghostCharacter.Direction = ghostCharacter.randomDirection();
-                        nextPosition = getNextPosition(ghostCharacter, ghostCharacter.Direction);
-                        directionAllowed = CheckNextCellForghost(nextPosition.X, nextPosition.Y);
-
-                        if ((nextPosition.X == 13 || nextPosition.X == 14) && nextPosition.Y == 13)
-                        {
-                            if (ghostCharacter.Scared)
-                            {
-                                directionAllowed = true;
-                            }
-                            else
-                            {
-                                directionAllowed = false;
-
-                            }
-                        }
-                    }
-                    ghostCharacter.Direction = ghostCharacter.Direction;
-                    moveghost(ghostCharacter);
-
-                }
-            }
-
-        }
-
-        public void PacManCharacterDies()
+        public void PacManCharacterDies() //animation of pacMan death + reinisializes for the restart 
         {
             switch (animatedPacMan.Texture.Name)
             {
@@ -645,7 +616,6 @@ namespace PacMan
                     }
                     else
                     {
-
                         pacManCharacter.Position = pacManCharacter.InitialPosition;
 
                         foreach (GhostCharacter ghostCharacter in listGhostCharacters)
@@ -659,27 +629,27 @@ namespace PacMan
                         beginPause = timer;
                     }
                     break;
+                }
             }
-        }
 
-        public void ghostDies(GhostCharacter ghostCharacter)
+        public void ghostDies(GhostCharacter ghostCharacter) // Replaces the ghosts when they die. They aren't scared anymore
         {
             ghostCharacter.Position = ghostCharacter.InitialPosition;
             ghostCharacter.Scared = false; 
             ghostCharacter.InHouse = true; 
         }
         
-        public void detectEnemy(PacManCharacter pacManCharcter, GhostCharacter ghostCharacter)
+        public void detectEnemy(PacManCharacter pacManCharcter, GhostCharacter ghostCharacter) //Detects collision betwen pacman and ghosts 
         {
             
             if (pacManCharcter.Position.X == ghostCharacter.Position.X && pacManCharcter.Position.Y == ghostCharacter.Position.Y )
             {
-                if (ghostCharacter.Scared)
+                if (ghostCharacter.Scared) // If the ghost is vulnerable, it dies and pacMan wins points.
                 {
                     ghostDies(ghostCharacter);
                     score = score + 200; 
                 }
-                else
+                else // otherwise, pacMan dies. 
                 {
                     if (pacManCharacter.Life > 0)
                     {
@@ -689,11 +659,8 @@ namespace PacMan
                         pacManCharacter.Moving = false;
 
                     }
-
                 }
             }
         }
-        
-
     }
 }
